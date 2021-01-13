@@ -27,11 +27,6 @@ final public class ProductID {
     }
 
     @Override
-    public int hashCode() {
-        return UPCcode.hashCode();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -43,4 +38,8 @@ final public class ProductID {
         return "Product{ " + "ProductID= " + UPCcode + " }";//+ " '\tPrice= "+price+" \tDescription: "+description+" }";
     }
 
+    @Override
+    public int hashCode() {
+        return UPCcode.hashCode();
+    }
 }

@@ -14,16 +14,16 @@ final public class HealthCardID {
         this.personalID = code;
     }
 
-    public String getPersonalID() {
-        return personalID;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HealthCardID hcardID = (HealthCardID) o;
         return personalID.equals(hcardID.personalID);
+    }
+
+    public String getPersonalID() {
+        return personalID;
     }
 
     public boolean isFormatValid(String code) {
