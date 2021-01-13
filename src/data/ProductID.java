@@ -1,13 +1,9 @@
 package data;
 //import Exceptions.*;
 
-
-
-
 final public class ProductID {
 
     private final String UPCcode;
-
 
     public ProductID(String upc) throws FormatException {
         if (upc.length() != 5 || !comprovar_upc(upc)) {                                          // COMPROVAR SI S'HA DE FICAR TAMBE NULL A PRICE I HA DESCRIPTION
