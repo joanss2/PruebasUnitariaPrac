@@ -10,7 +10,8 @@ final public class DigitalSignature {
     public DigitalSignature(String signature) throws eSignatureException {       // FALTE COMPROBAR SI ALGUN DELLS NO ES UN BYTE --- ?? COM HO FEM PASEM UN INT?¿
         if(checkSign(signature))
             this.signature = signature.getBytes();
-        throw new eSignatureException("Invalid Signature");
+        else
+            throw new eSignatureException("Invalid Signature");
     }
 
     public boolean checkSign(String signature){
