@@ -8,14 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HealthCardIDTest {
 
-    HealthCardID healthcard1, healthcard2,  healthcard11,healthcard12;
-    String healthcard1code,  healthcard11code,healthcard12code;
+    HealthCardID healthcard1, healthcard11,healthcard12;
 
 
     {
         try {
-            healthcard1 = new HealthCardID("BBBBBBBBQR648597807024000012");     // 28 pos BO
-            healthcard11 = new HealthCardID("BBBBBBBBQR648597807024000013");       //28 BO
+            healthcard1 = new HealthCardID("BBBBBBBBQR648597807024000012");
+            healthcard11 = new HealthCardID("BBBBBBBBQR648597807024000013");
             healthcard12 = new HealthCardID("BBBBBBBBQR648597807024000011");
         } catch (FormatException e) {
             e.printStackTrace();
