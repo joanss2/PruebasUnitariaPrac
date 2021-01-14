@@ -1,4 +1,5 @@
 package medicalConsultion;
+
 import Exceptions.FormatException;
 import data.ProductID;
 
@@ -8,10 +9,11 @@ public class ProductSpecification {
     private ProductID id;
     private BigDecimal price;
     private String description;
-    public ProductSpecification(ProductID id, BigDecimal price, String description) throws  NullPointerException, FormatException {
-        if(!comprovar_upc(id.getProductID()))
+
+    public ProductSpecification(ProductID id, BigDecimal price, String description) throws NullPointerException, FormatException {
+        if (!comprovar_upc(id.getProductID()))
             throw new FormatException("UPCcode from  ProductID is invalid");
-        if( price == null ||description == null || description.isEmpty())
+        if (price == null || description == null || description.isEmpty())
             throw new FormatException("Price null or description null, Wrong format of ProductSpecification");
 
         this.id = id;
@@ -19,8 +21,9 @@ public class ProductSpecification {
         this.description = description;
 
     }
+
     public boolean comprovar_upc(String upc) {
-        if(upc.length() != 5)
+        if (upc.length() != 5)
             return false;
         char[] stringToArray = upc.toCharArray();
         for (int i = 0; i < stringToArray.length; i++) {
@@ -30,22 +33,28 @@ public class ProductSpecification {
         }
         return true;
     }
-    public void setId(ProductID id){
-        this.id=id;
+
+    public void setId(ProductID id) {
+        this.id = id;
     }
-    public void setPrice(BigDecimal price){
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
-    public void setDescription(String description){
+
+    public void setDescription(String description) {
         this.description = description;
     }
-    public ProductID getId(){
+
+    public ProductID getId() {
         return this.id;
     }
-    public BigDecimal getPrice(){
+
+    public BigDecimal getPrice() {
         return this.price;
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return this.description;
     }
 

@@ -1,4 +1,5 @@
 package medicalConsultion;
+
 import Exceptions.IncorrectTakingGuidelinesException;
 import Exceptions.ProductNotInPrescription;
 import Exceptions.ProductAlreadyInPrescription;
@@ -8,7 +9,6 @@ import data.ProductID;
 import services.ScheduledVisitAgenda;
 
 import java.util.*;
-
 
 
 public class MedicalPrescription {// A class that represents medical prescription
@@ -36,7 +36,7 @@ public class MedicalPrescription {// A class that represents medical prescriptio
 
     } // Makes some inicialization
 
-    public TakingGuideline fromString(String [] instruc) {
+    public TakingGuideline fromString(String[] instruc) {
 
         dayMoment nou = dayMoment.valueOf(instruc[0]);
         float duracio = Float.parseFloat(instruc[1]);
@@ -44,27 +44,27 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         float dose = Float.parseFloat(instruc[3]);
         float freq = Float.parseFloat(instruc[4]);
         FqUnit frqUnit = FqUnit.valueOf(instruc[5]);
-        return new TakingGuideline(nou,duracio,comentari,dose,freq,frqUnit);
+        return new TakingGuideline(nou, duracio, comentari, dose, freq, frqUnit);
 
     }
 
 
-    public void addLine(ProductID prodID, String[] instruc) throws ProductAlreadyInPrescription, IncorrectTakingGuidelinesException{
-        if(!validInstruc(instruc)) {
+    public void addLine(ProductID prodID, String[] instruc) throws ProductAlreadyInPrescription, IncorrectTakingGuidelinesException {
+        if (!validInstruc(instruc)) {
             throw new IncorrectTakingGuidelinesException("Erroneous format of posology or instructions");
         }
-        if(liniesDePrescripcio.contains(new MedicinePrescriptionLine(prodID,fromString(instruc)))){
-            throw new ProductAlreadyInPrescription("The product with ID:"+prodID+ "is already in the prescription");
+        if (liniesDePrescripcio.contains(new MedicinePrescriptionLine(prodID, fromString(instruc)))) {
+            throw new ProductAlreadyInPrescription("The product with ID:" + prodID + "is already in the prescription");
         }
-        liniesDePrescripcio.add(new MedicinePrescriptionLine(prodID,fromString(instruc)));
+        liniesDePrescripcio.add(new MedicinePrescriptionLine(prodID, fromString(instruc)));
     }
 
 
     public void modifyLine(ProductID prodID, String[] instruc) throws ProductNotInPrescription, ProductAlreadyInPrescription, IncorrectTakingGuidelinesException {
         int index;
-        if ((index=listContainsKey(liniesDePrescripcio,prodID))!=-1) {
+        if ((index = listContainsKey(liniesDePrescripcio, prodID)) != -1) {
             liniesDePrescripcio.remove(index);
-            addLine(prodID,instruc);
+            addLine(prodID, instruc);
         }
         throw new ProductNotInPrescription("Product is not in the lines of the prescription");
     }
@@ -72,7 +72,7 @@ public class MedicalPrescription {// A class that represents medical prescriptio
 
     public void removeLine(ProductID prodID) throws ProductNotInPrescription {
         int index;
-        if ((index=listContainsKey(liniesDePrescripcio,prodID))!=-1)
+        if ((index = listContainsKey(liniesDePrescripcio, prodID)) != -1)
             liniesDePrescripcio.remove(index);
         else
             throw new ProductNotInPrescription("Product is not in the lines of the prescription");
@@ -80,8 +80,7 @@ public class MedicalPrescription {// A class that represents medical prescriptio
     }
 
 
-
-    public int listContainsKey(List<MedicinePrescriptionLine> llista,ProductID id){
+    public int listContainsKey(List<MedicinePrescriptionLine> llista, ProductID id) {
         for (MedicinePrescriptionLine medicinePrescriptionLine : llista) {
             if (medicinePrescriptionLine.getId().equals(id))
                 return llista.indexOf(medicinePrescriptionLine);
@@ -89,8 +88,8 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         return -1;
     }
 
-    public boolean validInstruc(String [] pautes) {
-        if(pautes.length!=6)
+    public boolean validInstruc(String[] pautes) {
+        if (pautes.length != 6)
             return false;
         boolean hola = false;
         for (dayMoment day : dayMoment.values()) {
@@ -146,10 +145,11 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         this.endDate = newEndDate;
     }
 
-    public HealthCardID getHcID(){
+    public HealthCardID getHcID() {
         return this.hcID;
     }
-    public DigitalSignature geteSign(){
+
+    public DigitalSignature geteSign() {
         return this.eSign;
     }
 

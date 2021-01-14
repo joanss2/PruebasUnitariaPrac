@@ -1,7 +1,8 @@
 package data;
 import Exceptions.*;
+import medicalConsultion.ProductIDInterface;
 
-final public class ProductID {
+final public class ProductID implements ProductIDInterface{
 
     private final String UPCcode;
 

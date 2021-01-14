@@ -13,22 +13,27 @@ public class Posology { // A class that represents the posology of a medicine
         this.freqUnit = u;
     }
 
-    public void setDose(float d){
+    public void setDose(float d) {
         this.dose = d;
     }
-    public void setFreq(float f){
+
+    public void setFreq(float f) {
         this.freq = f;
     }
-    public void setFreqUnit (FqUnit u){
+
+    public void setFreqUnit(FqUnit u) {
         this.freqUnit = u;
     }
-    public float getDose(){
+
+    public float getDose() {
         return this.dose;
     }
-    public float getFreq(){
+
+    public float getFreq() {
         return this.freq;
     }
-    public FqUnit getFreqUnit(){
+
+    public FqUnit getFreqUnit() {
         return this.freqUnit;
     }
 
@@ -37,9 +42,8 @@ public class Posology { // A class that represents the posology of a medicine
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Posology po1 = (Posology) o;
-        return dose== po1.dose && freq== po1.freq&& freqUnit.equals(po1.freqUnit);
+        return dose == po1.dose && freq == po1.freq && freqUnit.equals(po1.freqUnit);
     }
-
 
 
 }
