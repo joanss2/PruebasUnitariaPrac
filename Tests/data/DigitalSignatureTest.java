@@ -50,7 +50,7 @@ class DigitalSignatureTest {
         assertFalse(eSign2.equals(eSign3));
         assertFalse(eSign1.equals(eSign3));
         assertFalse(eSign1.equals(eSign4));
-        assertTrue(eSign21.equals(eSign2));
+        assertFalse(eSign21.equals(eSign2));
         assertTrue(eSign1.equals(eSign11));
     }
 }

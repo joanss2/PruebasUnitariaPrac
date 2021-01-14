@@ -1,5 +1,5 @@
 package medicalConsultion;
-
+import Exceptions.*;
 import data.DigitalSignature;
 import data.HealthCardID;
 import data.ProductID;

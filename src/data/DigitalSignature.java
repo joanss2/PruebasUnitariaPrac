@@ -17,7 +17,8 @@ final public class DigitalSignature {
     public boolean checkSign(String signature){
         if(signature == null)
             return false;
-        return !signature.equals("");
+        return true;
+        //return !signature.equals("");
     }
     public byte[] getsignature() {
         return this.signature;
