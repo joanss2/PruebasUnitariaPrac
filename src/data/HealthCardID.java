@@ -6,7 +6,6 @@ final public class HealthCardID {
     private final String personalID;
 
     public HealthCardID(String code) throws FormatException {
-
         if (code == null)
             throw new NullPointerException();
         if (!isFormatValid(code))
