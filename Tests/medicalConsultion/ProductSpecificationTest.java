@@ -56,4 +56,7 @@ class ProductSpecificationTest {
         assertEquals(productSpec1.getDescription(), "Per a mals de panxa");
     }
 
+
+
+
 }

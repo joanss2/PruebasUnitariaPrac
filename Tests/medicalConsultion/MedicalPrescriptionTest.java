@@ -1,10 +1,20 @@
 package medicalConsultion;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MedicalPrescriptionTest {
+
+    MedicalPrescription medP1;
+    MedicalPrescription medP2;
+
+    @BeforeEach
+    void init(){
+        medP1 = new MedicalPrescription();
+
+    }
 
     @Test
     void addLine() {
