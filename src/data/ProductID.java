@@ -6,13 +6,15 @@ final public class ProductID {
     private final String UPCcode;
 
     public ProductID(String upc) throws FormatException {
-        if (upc.length() != 5 || !comprovar_upc(upc)) {                                          // COMPROVAR SI S'HA DE FICAR TAMBE NULL A PRICE I HA DESCRIPTION
+        if (!comprovar_upc(upc)) {                                          // COMPROVAR SI S'HA DE FICAR TAMBE NULL A PRICE I HA DESCRIPTION
             throw new FormatException("UPCcode from  ProductID is invalid");
         }
         this.UPCcode = upc;
     }
 
     public boolean comprovar_upc(String upc) {
+        if(upc.length() != 5)
+            return false;
         char[] stringToArray = upc.toCharArray();
         for (int i = 0; i < stringToArray.length; i++) {
             if (!Character.isUpperCase(stringToArray[i]) || Character.isDigit(stringToArray[i])) {

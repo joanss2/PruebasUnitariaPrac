@@ -15,7 +15,7 @@ final public class DigitalSignature {
 
     public boolean checkSign(String signature) throws eSignatureException {
         if (signature == null || signature.equals(""))
-        throw new eSignatureException("Invalid Signature");
+            throw new eSignatureException("Invalid Signature");
         for (int i = 0; i < signature.length(); i++) {
             if ((int) signature.charAt(i) > 128)                            // No comprovem que és menor que -127 perk no transforma res a valors negatius
                 throw new eSignatureException("Invalid Signature");
