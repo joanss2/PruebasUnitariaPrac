@@ -25,13 +25,13 @@ class MedicinePrescriptionLineTest {
 
     @Test
     void equals() throws FormatException {
-        assertTrue(medLine1.equals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f,"Mal de panxa",2f,4f, FqUnit.DAY))));
-        assertFalse(medLine1.equals(new MedicinePrescriptionLine(new ProductID("ABCDF"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f,"Mal de panxa",2f,4f, FqUnit.DAY))));
-        assertFalse(medLine1.equals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.DURINGLUNCH, 30f,"Mal de panxa",2f,4f, FqUnit.DAY))));
-        assertFalse(medLine1.equals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f,"Mal de cap",2f,4f, FqUnit.DAY))));
-        assertFalse(medLine1.equals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f,"Mal de panxa",1f,4f, FqUnit.DAY))));
-        assertFalse(medLine1.equals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f,"Mal de panxa",2f,5f, FqUnit.DAY))));
-        assertFalse(medLine1.equals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f,"Mal de panxa",2f,4f, FqUnit.HOUR))));
+        assertEquals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de panxa", 2f, 4f, FqUnit.DAY)), medLine1);
+        assertNotEquals(new MedicinePrescriptionLine(new ProductID("ABCDF"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de panxa", 2f, 4f, FqUnit.DAY)), medLine1);
+        assertNotEquals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.DURINGLUNCH, 30f, "Mal de panxa", 2f, 4f, FqUnit.DAY)), medLine1);
+        assertNotEquals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de cap", 2f, 4f, FqUnit.DAY)), medLine1);
+        assertNotEquals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de panxa", 1f, 4f, FqUnit.DAY)), medLine1);
+        assertNotEquals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de panxa", 2f, 5f, FqUnit.DAY)), medLine1);
+        assertNotEquals(new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de panxa", 2f, 4f, FqUnit.HOUR)), medLine1);
     }
 
     @Test

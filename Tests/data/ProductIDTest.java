@@ -41,9 +41,9 @@ class ProductIDTest {
 
     @Test
     void testEquals() {
-        assertTrue(product1.equals(product1));
-        assertTrue(product2.equals(product2));
-        assertFalse(product1.equals(product2));
+        assertEquals(product1, product1);
+        assertEquals(product2, product2);
+        assertNotEquals(product2, product1);
     }
 
     @Test

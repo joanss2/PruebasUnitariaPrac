@@ -7,7 +7,7 @@ final public class ProductID implements ProductIDInterface{
     private final String UPCcode;
 
     public ProductID(String upc) throws FormatException {
-        if (!comprovar_upc(upc)) {                                          // COMPROVAR SI S'HA DE FICAR TAMBE NULL A PRICE I HA DESCRIPTION
+        if (!comprovar_upc(upc)) {
             throw new FormatException("UPCcode from  ProductID is invalid");
         }
         this.UPCcode = upc;

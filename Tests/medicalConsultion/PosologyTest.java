@@ -74,7 +74,9 @@ class PosologyTest {
     }
     @Test
     void equals(){
-        assertTrue(pos1.equals(new Posology(2.5f,3.8f,time)));
-        assertFalse(pos1.equals(new Posology(2f,4f,FqUnit.DAY)));
+        assertEquals(new Posology(2.5f, 3.8f, time), pos1);
+        assertNotEquals(new Posology(2f, 3.8f, time), pos1);
+        assertNotEquals(new Posology(2.5f, 4f, time), pos1);
+        assertNotEquals(new Posology(2.5f, 3.8f, FqUnit.DAY), pos1);
     }
 }

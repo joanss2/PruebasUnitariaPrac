@@ -61,11 +61,11 @@ class DigitalSignatureTest {
 
     @Test
     void testEquals() {
-        assertFalse(eSign1.equals(eSign2));
-        assertFalse(eSign2.equals(eSign3));
-        assertFalse(eSign1.equals(eSign3));
-        assertTrue(eSign1.equals(eSign11));
-        assertTrue(eSign21.equals(eSign2));
-        assertFalse(eSign3.equals(eSign31));
+        assertNotEquals(eSign2, eSign1);
+        assertNotEquals(eSign3, eSign2);
+        assertNotEquals(eSign3, eSign1);
+        assertEquals(eSign11, eSign1);
+        assertEquals(eSign2, eSign21);
+        assertNotEquals(eSign31, eSign3);
     }
 }

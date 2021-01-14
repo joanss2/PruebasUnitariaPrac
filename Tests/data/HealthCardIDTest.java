@@ -41,9 +41,9 @@ class HealthCardIDTest {
 
     @Test
     void testEquals() {
-        assertTrue(healthcard1.equals(healthcard1));
-        assertFalse(healthcard1.equals(healthcard11));
-        assertFalse(healthcard12.equals(healthcard11));
+        assertEquals(healthcard1, healthcard1);
+        assertNotEquals(healthcard11, healthcard1);
+        assertNotEquals(healthcard11, healthcard12);
     }
 
 

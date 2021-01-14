@@ -21,8 +21,6 @@ public class MedicalPrescription {// A class that represents medical prescriptio
     private ScheduledVisitAgenda agenda;
 
 
-    //private HashMap<ProductID, String[]> liniesDePrescripcio;
-
     // Its components, that is, the set of medical prescription lines
     @Deprecated
     public MedicalPrescription() {
