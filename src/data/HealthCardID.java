@@ -29,14 +29,12 @@ final public class HealthCardID {
         char[] stringToArray = code.toCharArray();
         if (code.length() != 28)
             return false;
-        if (!code.substring(0, 8).equals("BBBBBBBB"))
+        if (!code.startsWith("BBBBBBBB"))
             return false;
         else if (!(Character.isLetter(stringToArray[8]) && Character.isUpperCase(stringToArray[8]))
                 || !(Character.isLetter(stringToArray[9]) && Character.isUpperCase(stringToArray[9])))
             return false;
-        else if (!AllDigits(stringToArray, 10, 28))
-            return false;
-        return true;
+        else return AllDigits(stringToArray, 10, 28);
     }
 
     public boolean AllDigits(char[] finalpart, int a, int b) {

@@ -30,7 +30,6 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         this.endDate = new Date(2021, this.prescDate.getMonth() + 3, 7);
         liniesDePrescripcio = new ArrayList<>();
         this.hcID = agenda.getHealthCardID();///????
-        //this.eSign=;
 
     } // Makes some inicialization
 
@@ -89,14 +88,14 @@ public class MedicalPrescription {// A class that represents medical prescriptio
     public boolean validInstruc(String[] pautes) {
         if (pautes.length != 6)
             return false;
-        boolean hola = false;
+        boolean bool = false;
         for (dayMoment day : dayMoment.values()) {
             if (day.name().equals(pautes[0])) {
-                hola = true;
+                bool = true;
                 break;
             }
         }
-        if (!hola)
+        if (!bool)
             return false;
         try {
             Float.parseFloat(pautes[1]);
@@ -107,18 +106,18 @@ public class MedicalPrescription {// A class that represents medical prescriptio
             //throw new NumberFormatException("Duration is not a float type");
         }
 
-        hola = false;
+        bool = false;
         for (FqUnit unit : FqUnit.values()) {
             if (unit.name().equals(pautes[5])) {
-                hola = true;
+                bool = true;
                 break;
             }
         }
-        return hola;
+        return bool;
     }
 
 
-    // the getters and setters
+    // getters and setters
     public Date getPrescDate() {
         return this.prescDate;
     }
