@@ -1,5 +1,5 @@
 package data;
-import Exceptions.eSignatureException;
+import Exceptions.*;
 
 import java.util.Arrays;
 
@@ -17,10 +17,7 @@ final public class DigitalSignature {
     public boolean checkSign(String signature){
         if(signature == null)
             return false;
-        if(signature.equals(""))
-            return false;
-
-        return true;
+        return !signature.equals("");
     }
     public byte[] getsignature() {
         return this.signature;
