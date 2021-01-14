@@ -9,8 +9,7 @@ public class Posology { // A class that represents the posology of a medicine
         this.dose = d;
         this.freq = f;
         this.freqUnit = u;
-    } // Initializes attributes
-
+    }
 
     public void setDose(float d){
         this.dose = d;
@@ -30,6 +29,8 @@ public class Posology { // A class that represents the posology of a medicine
     public FqUnit getFreqUnit(){
         return this.freqUnit;
     }
+
+
 
 
 }
