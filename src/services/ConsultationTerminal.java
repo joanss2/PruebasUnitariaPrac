@@ -30,8 +30,8 @@ public class ConsultationTerminal {
         pacient = VisitesProgramades.getHealthCardID();
         if(pacient.isFormatValid(pacient.getPersonalID()))
             throw new FormatException("PersonalID code from HealthCardID is invalid");
-        if("PACIENT NOT IN HNS")
-            throw new HealthCardException("Patient not in HealthNationalService");
+        /*if("PACIENT NOT IN HNS")
+            throw new HealthCardException("Patient not in HealthNationalService");*/
         if(medicalPrescription.getPrescCode()==0)
             throw new NotValidePrescriptionException("Patient does not have prescriptions assigned");
 
