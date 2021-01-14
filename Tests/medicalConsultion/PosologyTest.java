@@ -72,4 +72,9 @@ class PosologyTest {
         assertEquals(pos2.getFreqUnit(),time2);
         assertEquals(pos3.getFreqUnit(),time3);
     }
+    @Test
+    void equals(){
+        assertTrue(pos1.equals(new Posology(2.5f,3.8f,time)));
+        assertFalse(pos1.equals(new Posology(2f,4f,FqUnit.DAY)));
+    }
 }

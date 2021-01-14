@@ -92,7 +92,6 @@ public class MedicalPrescription {// A class that represents medical prescriptio
     public boolean validInstruc(String [] pautes) {
         if(pautes.length!=6)
             return false;
-
         boolean hola = false;
         for (dayMoment day : dayMoment.values()) {
             if (day.name().equals(pautes[0])) {
@@ -100,10 +99,8 @@ public class MedicalPrescription {// A class that represents medical prescriptio
                 break;
             }
         }
-
         if (!hola)
             return false;
-
         try {
             Float.parseFloat(pautes[1]);
             Float.parseFloat(pautes[3]);
