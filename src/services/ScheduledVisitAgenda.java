@@ -6,18 +6,10 @@ import data.ProductID;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScheduledVisitAgenda {
-    private List<HealthCardID> llista_pacients;
+public interface ScheduledVisitAgenda {
 
-    public ScheduledVisitAgenda(){
-        this.llista_pacients = new ArrayList<>();
-    }
+    void add_pacient(HealthCardID nouID);
 
-    public void add_pacient(HealthCardID nouid) {
-        llista_pacients.add(nouid);
-    }
+    HealthCardID getHealthCardID();
 
-    public HealthCardID getHealthCardID(){//throws HealthCardException{
-        return llista_pacients.remove(0);
-    }
 }

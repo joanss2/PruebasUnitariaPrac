@@ -28,17 +28,6 @@ class ProductSpecificationTest {
     }
 
     @Test
-    public void comprovar_upc() throws NullPointerException {
-        assertTrue(productSpec1.comprovar_upc(productID1.getProductID()));
-        assertFalse(productSpec2.comprovar_upc("BBSITA"));
-        assertFalse(productSpec2.comprovar_upc("434aa"));
-        FormatException thrown = assertThrows(FormatException.class, () -> new ProductSpecification(productID2, new BigDecimal("0"), ""));
-        assertTrue(thrown.getMessage().contains("Price null or description null, Wrong format of ProductSpecification"));
-        thrown = assertThrows(FormatException.class, () -> new ProductSpecification(new ProductID("aabcQ"), new BigDecimal("4.5"), ""));
-        assertTrue(thrown.getMessage().contains("UPCcode from  ProductID is invalid"));
-    }
-
-    @Test
     public void getId() {
         assertEquals(productSpec1.getId(), productID1);
         assertNotEquals(productID1.getProductID(), productID2);

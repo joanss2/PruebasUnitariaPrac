@@ -22,12 +22,11 @@ public class MedicalPrescription {// A class that represents medical prescriptio
 
 
     // Its components, that is, the set of medical prescription lines
-    //@Deprecated
-    public MedicalPrescription() {
+    public MedicalPrescription(int prescCode , Date prescDate, Date endDate) {
 
-        this.prescCode = 10;
-        this.prescDate = new Date();
-        this.endDate = new Date(2021, 11, 21);
+        this.prescCode = prescCode;
+        this.prescDate = prescDate;
+        this.endDate = endDate;
         liniesDePrescripcio = new ArrayList<>();
         this.hcID = agenda.getHealthCardID();///????
 

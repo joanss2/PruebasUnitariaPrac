@@ -1,8 +1,8 @@
 package data;
-import Exceptions.*;
-import medicalConsultion.ProductIDInterface;
 
-final public class ProductID implements ProductIDInterface{
+import Exceptions.*;
+
+final public class ProductID {
 
     private final String UPCcode;
 
@@ -14,7 +14,7 @@ final public class ProductID implements ProductIDInterface{
     }
 
     public boolean comprovar_upc(String upc) {
-        if(upc.length() != 5)
+        if (upc.length() != 5)
             return false;
         char[] stringToArray = upc.toCharArray();
         for (int i = 0; i < stringToArray.length; i++) {
