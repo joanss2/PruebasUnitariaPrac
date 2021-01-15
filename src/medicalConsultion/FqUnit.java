@@ -1,5 +1,5 @@
 package medicalConsultion;
 
 public enum FqUnit {
-    HOUR, DAY, WEEK, MONTH;
+    HOUR, DAY, WEEK, MONTH
 }

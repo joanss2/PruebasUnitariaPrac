@@ -3,35 +3,27 @@ package medicalConsultion;
 import Exceptions.IncorrectTakingGuidelinesException;
 import Exceptions.ProductNotInPrescription;
 import Exceptions.ProductAlreadyInPrescription;
-import data.DigitalSignature;
-import data.HealthCardID;
 import data.ProductID;
-import services.ScheduledVisitAgenda;
 
 import java.util.*;
 
-
-public class MedicalPrescription {// A class that represents medical prescription
+// A class that represents medical prescription
+public class MedicalPrescription {
     private int prescCode;
     private Date prescDate;
     private Date endDate;
-    private List<MedicinePrescriptionLine> liniesDePrescripcio;
-
-
+    private final List<MedicinePrescriptionLine> liniesDePrescripcio;
 
     // Its components, that is, the set of medical prescription lines
     //@Deprecated
     public MedicalPrescription(int prescCode, Date prescDate, Date endDate) {
-
         this.prescCode = prescCode;
         this.prescDate = prescDate;
         this.endDate = endDate;
         liniesDePrescripcio = new ArrayList<>();
-
     }
 
     public TakingGuideline fromString(String[] instruc) {
-
         dayMoment nou = dayMoment.valueOf(instruc[0]);
         float duracio = Float.parseFloat(instruc[1]);
         String comentari = instruc[2];
@@ -70,7 +62,6 @@ public class MedicalPrescription {// A class that represents medical prescriptio
 
     }
 
-
     public int listContainsKey(List<MedicinePrescriptionLine> llista, ProductID id) {
         for (MedicinePrescriptionLine medicinePrescriptionLine : llista) {
             if (medicinePrescriptionLine.getId().equals(id))
@@ -97,9 +88,7 @@ public class MedicalPrescription {// A class that represents medical prescriptio
             Float.parseFloat(pautes[4]);
         } catch (NumberFormatException e) {
             return false;
-            //throw new NumberFormatException("Duration is not a float type");
         }
-
         bool = false;
         for (FqUnit unit : FqUnit.values()) {
             if (unit.name().equals(pautes[5])) {
@@ -109,7 +98,6 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         }
         return bool;
     }
-
 
     // getters and setters
     public Date getPrescDate() {
@@ -124,7 +112,7 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         return this.prescCode;
     }
 
-    public List<MedicinePrescriptionLine> getMedicinePrescriptionLineList(){
+    public List<MedicinePrescriptionLine> getMedicinePrescriptionLineList() {
         return liniesDePrescripcio;
     }
 
@@ -139,7 +127,5 @@ public class MedicalPrescription {// A class that represents medical prescriptio
     public void setEndDate(Date newEndDate) {
         this.endDate = newEndDate;
     }
-
-
 
 }

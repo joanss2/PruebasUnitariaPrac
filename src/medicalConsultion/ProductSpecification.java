@@ -22,6 +22,13 @@ public class ProductSpecification {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductSpecification prodSpec1 = (ProductSpecification) o;
+        return id.equals(prodSpec1.id) && price.equals(prodSpec1.price) && description.equals(prodSpec1.description);
+    }
 
     public void setId(ProductID id) {
         this.id = id;

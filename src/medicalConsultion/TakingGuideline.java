@@ -11,7 +11,6 @@ public class TakingGuideline { // Represents the taking guidelines of a medicine
         this.duration = du;
         this.instructions = i;
         this.posology = new Posology(d,f,u);
-
     } // Initializes attributes
 
     public void setdMoment(dayMoment DM){

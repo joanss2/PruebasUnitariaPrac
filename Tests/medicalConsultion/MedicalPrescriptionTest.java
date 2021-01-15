@@ -28,20 +28,19 @@ class MedicalPrescriptionTest {
     String[] instruc6;
     String[] instruc7;
     String[] instruc8;
-    Exception medPrescException;
 
     @BeforeEach
     @Deprecated
     void init() throws FormatException {
         medP1 = new MedicalPrescription(1,
-                new Date(2021, Calendar.JANUARY,1),
-                new Date(2021, Calendar.JANUARY,10));
+                new Date(2021, Calendar.JANUARY, 1),
+                new Date(2021, Calendar.JANUARY, 10));
         medP2 = new MedicalPrescription(1,
-                new Date(2021, Calendar.JANUARY,1),
-                new Date(2021, Calendar.FEBRUARY,1));
+                new Date(2021, Calendar.JANUARY, 1),
+                new Date(2021, Calendar.FEBRUARY, 1));
         medL1 = new MedicinePrescriptionLine(new ProductID("ABCDE"),
                 new TakingGuideline(dayMoment.AFTERLUNCH, 5.5f, "Después de la comida",
-                7.5f, 4f, FqUnit.HOUR));
+                        7.5f, 4f, FqUnit.HOUR));
         medL2 = new MedicinePrescriptionLine(new ProductID("BBSIT"),
                 new TakingGuideline(dayMoment.AFTERDINNER, 4.5f, "Después de la cena",
                         6.5f, 5f, FqUnit.HOUR));
@@ -49,14 +48,14 @@ class MedicalPrescriptionTest {
         medList.add(new MedicinePrescriptionLine(new ProductID("BBSIT"),
                 new TakingGuideline(dayMoment.AFTERDINNER, 4.5f, "Después de la cena",
                         6.5f, 5f, FqUnit.HOUR)));
-        instruc1 = new String[]{"AFTERLUNCH", "5.5f","Después de la comida", "7.5f", "4f", "HOUR"};
-        instruc2 = new String[]{"AFTERDINNER", "4.5f","Después de la cena", "6.5f", "5f", "HOUR"};
-        instruc3 = new String[]{"AFTERLUNCH", "5.5f","Después de la comida", "7.5f", "4f"};
-        instruc4 = new String[]{"AFTERLUNCHs", "5.5f","Después de la comida", "7.5f", "4f", "HOUR"};
-        instruc5 = new String[]{"AFTERLUNCH", "f","Después de la comida", "7.5f", "4f", "HOUR"};
-        instruc6 = new String[]{"AFTERLUNCH", "5.5f","Después de la comida", "f", "4f", "HOUR"};
-        instruc7 = new String[]{"AFTERLUNCH", "5.5f","Después de la comida", "7.5f", "f", "HOUR"};
-        instruc8 = new String[]{"AFTERLUNCH", "5.5f","Después de la comida", "7.5f", "4f", "HOURs"};
+        instruc1 = new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"};
+        instruc2 = new String[]{"AFTERDINNER", "4.5f", "Después de la cena", "6.5f", "5f", "HOUR"};
+        instruc3 = new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f"};
+        instruc4 = new String[]{"AFTERLUNCHs", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"};
+        instruc5 = new String[]{"AFTERLUNCH", "f", "Después de la comida", "7.5f", "4f", "HOUR"};
+        instruc6 = new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "f", "4f", "HOUR"};
+        instruc7 = new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "f", "HOUR"};
+        instruc8 = new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOURs"};
     }
 
     @Test
@@ -74,20 +73,20 @@ class MedicalPrescriptionTest {
     @Test
     @Deprecated
     void getPrescDate() {
-        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY,1));
-        assertNotEquals(medP1.getPrescDate(), new Date(2020, Calendar.JANUARY,1));
-        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY,1));
-        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY,2));
+        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY, 1));
+        assertNotEquals(medP1.getPrescDate(), new Date(2020, Calendar.JANUARY, 1));
+        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY, 1));
+        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY, 2));
         assertEquals(medP2.getPrescDate(), medP1.getPrescDate());
     }
 
     @Test
     @Deprecated
     void getEndDate() {
-        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY,10));
-        assertNotEquals(medP1.getEndDate(), new Date(2020, Calendar.JANUARY,1));
-        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY,1));
-        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY,2));
+        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY, 10));
+        assertNotEquals(medP1.getEndDate(), new Date(2020, Calendar.JANUARY, 1));
+        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY, 1));
+        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY, 2));
         assertNotEquals(medP2.getEndDate(), medP1.getEndDate());
     }
 
@@ -121,30 +120,30 @@ class MedicalPrescriptionTest {
     @Test
     @Deprecated
     void setPrescDate() {
-        medP1.setPrescDate(new Date(2021, Calendar.FEBRUARY,1));
-        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY,1));
-        medP2.setPrescDate(new Date(2021, Calendar.FEBRUARY,1));
-        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY,1));
+        medP1.setPrescDate(new Date(2021, Calendar.FEBRUARY, 1));
+        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY, 1));
+        medP2.setPrescDate(new Date(2021, Calendar.FEBRUARY, 1));
+        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY, 1));
         medP1.setPrescDate(medP2.getPrescDate());
-        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY,1));
+        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY, 1));
     }
 
     @Test
     @Deprecated
     void setEndDate() {
-        medP1.setEndDate(new Date(2021, Calendar.FEBRUARY,1));
-        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY,1));
-        medP2.setEndDate(new Date(2021, Calendar.FEBRUARY,1));
-        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY,1));
+        medP1.setEndDate(new Date(2021, Calendar.FEBRUARY, 1));
+        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY, 1));
+        medP2.setEndDate(new Date(2021, Calendar.FEBRUARY, 1));
+        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY, 1));
         medP1.setEndDate(medP2.getEndDate());
-        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY,1));
+        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY, 1));
     }
 
     @Test
     void addLine() throws FormatException, ProductAlreadyInPrescription, IncorrectTakingGuidelinesException {
         medP1.addLine(new ProductID("BBSIT"), instruc2);
         assertEquals(medP1.getMedicinePrescriptionLineList(), medList);
-        IncorrectTakingGuidelinesException thrown = assertThrows(IncorrectTakingGuidelinesException.class, () -> medP1.addLine(new ProductID("DUREX"), instruc6 ),
+        IncorrectTakingGuidelinesException thrown = assertThrows(IncorrectTakingGuidelinesException.class, () -> medP1.addLine(new ProductID("DUREX"), instruc6),
                 "Erroneous format of posology or instructions");
         assertTrue(thrown.getMessage().contains("Erroneous format of posology or instructions"));
         ProductAlreadyInPrescription thrown2 = assertThrows(ProductAlreadyInPrescription.class, () -> medP1.addLine(new ProductID("BBSIT"), instruc2),
@@ -159,7 +158,7 @@ class MedicalPrescriptionTest {
         medP1.modifyLine(new ProductID("BBSIT"), instruc1);
         assertNotEquals(medList, medP1.getMedicinePrescriptionLineList());
         assertEquals(medP1.getMedicinePrescriptionLineList(), medP2.getMedicinePrescriptionLineList());
-        ProductNotInPrescription thrown = assertThrows(ProductNotInPrescription.class, () -> medP1.modifyLine(new ProductID("DUREX"), instruc2 ),
+        ProductNotInPrescription thrown = assertThrows(ProductNotInPrescription.class, () -> medP1.modifyLine(new ProductID("DUREX"), instruc2),
                 "Product is not in the lines of the prescription");
         assertTrue(thrown.getMessage().contains("Product is not in the lines of the prescription"));
     }

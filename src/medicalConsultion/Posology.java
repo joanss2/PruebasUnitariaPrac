@@ -1,7 +1,5 @@
 package medicalConsultion;
 
-import data.ProductID;
-
 public class Posology { // A class that represents the posology of a medicine
     private float dose;
     private float freq;
