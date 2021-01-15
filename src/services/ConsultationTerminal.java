@@ -19,14 +19,6 @@ public class ConsultationTerminal {
     private List<ProductSpecification> busqueda;
     private ProductSpecification medicament;
 
-
-    public ConsultationTerminal(HealthNationalService HNS, ScheduledVisitAgenda VisitesProgramades, DigitalSignature eSign) {
-        this.HNS = HNS;
-        this.VisitesProgramades = VisitesProgramades;
-        this.eSign = eSign;
-    }
-
-
     public void initRevision() throws
             NotValidePrescriptionException, ConnectException, FormatException, HealthCardException {
 
@@ -96,6 +88,10 @@ public class ConsultationTerminal {
         }
         System.out.println(medicalPrescription.toString());
 
+    }
+
+    public HealthCardID getPacient(){
+        return this.pacient;
     }
     /*public DigitalSignature geteSign(){
         return this.eSign;

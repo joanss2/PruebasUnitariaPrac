@@ -18,7 +18,7 @@ public class MedicalPrescription {// A class that represents medical prescriptio
     private HealthCardID hcID; // the healthcard ID of the patient
     private DigitalSignature eSign; // the eSignature of the doctor
     private List<MedicinePrescriptionLine> liniesDePrescripcio;
-    private ScheduledVisitAgenda agenda;
+    private ScheduledVisitAgenda visitesProgramades;
 
 
     // Its components, that is, the set of medical prescription lines
@@ -29,7 +29,7 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         this.prescDate = prescDate;
         this.endDate = endDate;
         liniesDePrescripcio = new ArrayList<>();
-        this.hcID = agenda.getHealthCardID();///????
+        //this.hcID = visitesProgramades.getHealthCardID();///????
 
     }
 
@@ -42,30 +42,27 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         float freq = Float.parseFloat(instruc[4]);
         FqUnit frqUnit = FqUnit.valueOf(instruc[5]);
         return new TakingGuideline(nou, duracio, comentari, dose, freq, frqUnit);
-
     }
-
 
     public void addLine(ProductID prodID, String[] instruc) throws ProductAlreadyInPrescription, IncorrectTakingGuidelinesException {
         if (!validInstruc(instruc)) {
             throw new IncorrectTakingGuidelinesException("Erroneous format of posology or instructions");
         }
-        if (liniesDePrescripcio.contains(new MedicinePrescriptionLine(prodID, fromString(instruc)))) {
+        if (listContainsKey(liniesDePrescripcio, prodID) != -1) {
             throw new ProductAlreadyInPrescription("The product with ID:" + prodID + "is already in the prescription");
         }
         liniesDePrescripcio.add(new MedicinePrescriptionLine(prodID, fromString(instruc)));
     }
-
 
     public void modifyLine(ProductID prodID, String[] instruc) throws ProductNotInPrescription, ProductAlreadyInPrescription, IncorrectTakingGuidelinesException {
         int index;
         if ((index = listContainsKey(liniesDePrescripcio, prodID)) != -1) {
             liniesDePrescripcio.remove(index);
             addLine(prodID, instruc);
+        } else {
+            throw new ProductNotInPrescription("Product is not in the lines of the prescription");
         }
-        throw new ProductNotInPrescription("Product is not in the lines of the prescription");
     }
-
 
     public void removeLine(ProductID prodID) throws ProductNotInPrescription {
         int index;
@@ -128,6 +125,10 @@ public class MedicalPrescription {// A class that represents medical prescriptio
 
     public int getPrescCode() {
         return this.prescCode;
+    }
+
+    public List<MedicinePrescriptionLine> getMedicinePrescriptionLineList(){
+        return liniesDePrescripcio;
     }
 
     public void setPrescCode(int newPrescCode) {
