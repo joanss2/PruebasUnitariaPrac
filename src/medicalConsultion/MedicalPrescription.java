@@ -30,7 +30,7 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         liniesDePrescripcio = new ArrayList<>();
         this.hcID = agenda.getHealthCardID();///????
 
-    } // Makes some inicialization
+    }
 
     public TakingGuideline fromString(String[] instruc) {
 
