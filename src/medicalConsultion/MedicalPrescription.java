@@ -22,7 +22,8 @@ public class MedicalPrescription {// A class that represents medical prescriptio
 
 
     // Its components, that is, the set of medical prescription lines
-    public MedicalPrescription(int prescCode , Date prescDate, Date endDate) {
+    //@Deprecated
+    public MedicalPrescription(int prescCode, Date prescDate, Date endDate) {
 
         this.prescCode = prescCode;
         this.prescDate = prescDate;
