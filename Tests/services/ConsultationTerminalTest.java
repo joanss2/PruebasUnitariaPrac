@@ -149,8 +149,6 @@ class ConsultationTerminalTest {
                 "Derivado de la morfina"));
     }
 
-    private MedicalPrescription actual;
-
     @Test
     void initRevision() throws HealthCardException, ConnectException, NotValidePrescriptionException, FormatException {
         consultationTerminal.initRevision();
