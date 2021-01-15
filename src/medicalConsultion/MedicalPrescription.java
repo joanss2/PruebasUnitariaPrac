@@ -15,10 +15,8 @@ public class MedicalPrescription {// A class that represents medical prescriptio
     private int prescCode;
     private Date prescDate;
     private Date endDate;
-    private HealthCardID hcID; // the healthcard ID of the patient
-    private DigitalSignature eSign; // the eSignature of the doctor
     private List<MedicinePrescriptionLine> liniesDePrescripcio;
-    private ScheduledVisitAgenda visitesProgramades;
+
 
 
     // Its components, that is, the set of medical prescription lines
@@ -29,7 +27,6 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         this.prescDate = prescDate;
         this.endDate = endDate;
         liniesDePrescripcio = new ArrayList<>();
-        //this.hcID = visitesProgramades.getHealthCardID();///????
 
     }
 
@@ -143,12 +140,6 @@ public class MedicalPrescription {// A class that represents medical prescriptio
         this.endDate = newEndDate;
     }
 
-    public HealthCardID getHcID() {
-        return this.hcID;
-    }
 
-    public DigitalSignature geteSign() {
-        return this.eSign;
-    }
 
 }
