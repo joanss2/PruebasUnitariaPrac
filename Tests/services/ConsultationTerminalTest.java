@@ -19,19 +19,6 @@ class ConsultationTerminalTest {
 
         private static List<ProductSpecification> searchResults = new ArrayList<>();
 
-       /* public void add_product_to_catalog(ProductSpecification product){                     //MIRAR SI IMPLEMENTAR O NO
-            if(!cataleg.contains(product)){
-                cataleg.add(product);
-            }
-        }
-
-        public void add_register(HealthCardID id, MedicalPrescription medLine){
-            if(!Database.containsKey(id)){
-                Database.put(id,medLine);
-            }
-        }*/
-
-
         @Override
         public MedicalPrescription getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException {
             return Database.get(hcID);
@@ -55,7 +42,7 @@ class ConsultationTerminalTest {
 
         @Override
         public MedicalPrescription sendePrescription(MedicalPrescription ePresc) throws ConnectException, NotValidePrescription, eSignatureException, NotCompletedMedicalPrescription {
-            return null;
+            return ePresc;
         }
     }
 
@@ -258,15 +245,30 @@ class ConsultationTerminalTest {
         assertTrue(thrown.getMessage().contains("End date comes before PrescDate"));
 
     }
-/*
+
     @Test
-    void sendePrescription() {
+    @Deprecated
+    void sendePrescription() throws HealthCardException, ConnectException, NotValidePrescriptionException, FormatException,
+            NotFinishedTreatmentException, AnyCurrentPrescriptionException, AnyKeyWordMedicineException,
+            AnyMedicineSearchException, ProductAlreadyInPrescription, AnySelectedMedicineException,
+            IncorrectTakingGuidelinesException, IncorrectEndingDateException {
+
+        consultationTerminal.initRevision();
+        consultationTerminal.initPrescriptionEdition();
+        consultationTerminal.searchForProducts("DALSY");
+        consultationTerminal.selectProduct(1);
+        consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"});
+        consultationTerminal.enterTreatmentEndingDate(new Date(2022-1900,Calendar.MARCH,3));
     }
 
     @Test
     void printePresc() {
+        printingException thrown = assertThrows(printingException.class, () -> consultationTerminal.printePresc(),
+                "No prescription object");
+        assertTrue(thrown.getMessage().contains("No prescription object"));
+
     }
-    */
+
 
 
 }
