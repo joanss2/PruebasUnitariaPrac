@@ -66,7 +66,7 @@ public class ConsultationTerminal {
     }
 
     public void enterTreatmentEndingDate(Date date) throws IncorrectEndingDateException {
-        if (date == null || date.before(medicalPrescription.getPrescDate()))
+        if (date == null || date.before(medicalPrescription.getPrescDate()) || date.before(new Date()))
             throw new IncorrectEndingDateException("End date comes before PrescDate");
         medicalPrescription.setPrescDate(new Date());
         medicalPrescription.setEndDate(date);

@@ -236,11 +236,29 @@ class ConsultationTerminalTest {
         consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"});
         assertEquals(consultationTerminal.medicalPrescription.getMedicinePrescriptionLineList(),lines);
     }
-/*
+    @Deprecated
     @Test
-    void enterTreatmentEndingDate() {
-    }
+    void enterTreatmentEndingDate() throws ProductAlreadyInPrescription, AnySelectedMedicineException, IncorrectTakingGuidelinesException,
+            AnyMedicineSearchException, ConnectException, AnyKeyWordMedicineException, NotFinishedTreatmentException,
+            AnyCurrentPrescriptionException, NotValidePrescriptionException, HealthCardException, FormatException, IncorrectEndingDateException {
 
+
+        consultationTerminal.initRevision();
+        consultationTerminal.initPrescriptionEdition();
+        Date old = consultationTerminal.medicalPrescription.getEndDate();
+        consultationTerminal.searchForProducts("DALSY");
+        consultationTerminal.selectProduct(1);
+        consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"});
+        consultationTerminal.enterTreatmentEndingDate(new Date(2022-1900,Calendar.MARCH,3));
+        assertEquals(consultationTerminal.medicalPrescription.getEndDate(),new Date(2022-1900,Calendar.MARCH,3));
+        assertNotEquals(old,consultationTerminal.medicalPrescription.getEndDate());
+        IncorrectEndingDateException thrown = assertThrows(IncorrectEndingDateException.class, () ->
+                        consultationTerminal.enterTreatmentEndingDate(new Date(2020-1900,Calendar.MARCH,3)),
+                "End date comes before PrescDate");
+        assertTrue(thrown.getMessage().contains("End date comes before PrescDate"));
+
+    }
+/*
     @Test
     void sendePrescription() {
     }
