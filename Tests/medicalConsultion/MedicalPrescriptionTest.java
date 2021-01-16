@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MedicalPrescriptionTest {
 
-    MedicalPrescription medP1, medP2;
+    MedicalPrescription medP1, medP2, medP3;
     MedicinePrescriptionLine medL1, medL2;
     List<MedicinePrescriptionLine> medList;
     String[] instruc1, instruc2, instruc3, instruc4;
@@ -23,19 +23,28 @@ class MedicalPrescriptionTest {
 
     @BeforeEach
     @Deprecated
-    void init() throws FormatException {
+    void init() throws FormatException, IncorrectEndingDateException {
         medP1 = new MedicalPrescription(1,
-                new Date(2021, Calendar.JANUARY, 1),
-                new Date(2021, Calendar.JANUARY, 10));
+                new Date(2021-1900, Calendar.JANUARY, 1),
+                new Date(2021-1900, Calendar.JANUARY, 10));
         medP2 = new MedicalPrescription(1,
-                new Date(2021, Calendar.JANUARY, 1),
-                new Date(2021, Calendar.FEBRUARY, 1));
+                new Date(2021-1900, Calendar.JANUARY, 1),
+                new Date(2021-1900, Calendar.FEBRUARY, 1));
+
+        IncorrectEndingDateException thrown = assertThrows(IncorrectEndingDateException.class, () -> medP3 = new MedicalPrescription(1,
+                new Date(2021-1900, Calendar.JANUARY, 1),
+                new Date(2020-1900, Calendar.FEBRUARY, 1)),
+                "End date is after prescription date");
+
+        assertTrue(thrown.getMessage().contains("End date is after prescription date"));
+
         medL1 = new MedicinePrescriptionLine(new ProductID("ABCDE"),
                 new TakingGuideline(dayMoment.AFTERLUNCH, 5.5f, "Después de la comida",
                         7.5f, 4f, FqUnit.HOUR));
         medL2 = new MedicinePrescriptionLine(new ProductID("BBSIT"),
                 new TakingGuideline(dayMoment.AFTERDINNER, 4.5f, "Después de la cena",
                         6.5f, 5f, FqUnit.HOUR));
+
         medList = new ArrayList<>();
         medList.add(new MedicinePrescriptionLine(new ProductID("BBSIT"),
                 new TakingGuideline(dayMoment.AFTERDINNER, 4.5f, "Después de la cena",
@@ -65,20 +74,20 @@ class MedicalPrescriptionTest {
     @Test
     @Deprecated
     void getPrescDate() {
-        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY, 1));
-        assertNotEquals(medP1.getPrescDate(), new Date(2020, Calendar.JANUARY, 1));
-        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY, 1));
-        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY, 2));
+        assertEquals(medP1.getPrescDate(), new Date(2021-1900, Calendar.JANUARY, 1));
+        assertNotEquals(medP1.getPrescDate(), new Date(2020-1900, Calendar.JANUARY, 1));
+        assertNotEquals(medP1.getPrescDate(), new Date(2021-1900, Calendar.FEBRUARY, 1));
+        assertNotEquals(medP1.getPrescDate(), new Date(2021-1900, Calendar.JANUARY, 2));
         assertEquals(medP2.getPrescDate(), medP1.getPrescDate());
     }
 
     @Test
     @Deprecated
     void getEndDate() {
-        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY, 10));
-        assertNotEquals(medP1.getEndDate(), new Date(2020, Calendar.JANUARY, 1));
-        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY, 1));
-        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY, 2));
+        assertEquals(medP1.getEndDate(), new Date(2021-1900, Calendar.JANUARY, 10));
+        assertNotEquals(medP1.getEndDate(), new Date(2020-1900, Calendar.JANUARY, 1));
+        assertNotEquals(medP1.getEndDate(), new Date(2021-1900, Calendar.FEBRUARY, 1));
+        assertNotEquals(medP1.getEndDate(), new Date(2021-1900, Calendar.JANUARY, 2));
         assertNotEquals(medP2.getEndDate(), medP1.getEndDate());
     }
 
@@ -112,23 +121,23 @@ class MedicalPrescriptionTest {
     @Test
     @Deprecated
     void setPrescDate() {
-        medP1.setPrescDate(new Date(2021, Calendar.FEBRUARY, 1));
-        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY, 1));
-        medP2.setPrescDate(new Date(2021, Calendar.FEBRUARY, 1));
-        assertNotEquals(medP1.getPrescDate(), new Date(2021, Calendar.JANUARY, 1));
+        medP1.setPrescDate(new Date(2021-1900, Calendar.FEBRUARY, 1));
+        assertEquals(medP1.getPrescDate(), new Date(2021-1900, Calendar.FEBRUARY, 1));
+        medP2.setPrescDate(new Date(2021-1900, Calendar.FEBRUARY, 1));
+        assertNotEquals(medP1.getPrescDate(), new Date(2021-1900, Calendar.JANUARY, 1));
         medP1.setPrescDate(medP2.getPrescDate());
-        assertEquals(medP1.getPrescDate(), new Date(2021, Calendar.FEBRUARY, 1));
+        assertEquals(medP1.getPrescDate(), new Date(2021-1900, Calendar.FEBRUARY, 1));
     }
 
     @Test
     @Deprecated
     void setEndDate() {
-        medP1.setEndDate(new Date(2021, Calendar.FEBRUARY, 1));
-        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY, 1));
-        medP2.setEndDate(new Date(2021, Calendar.FEBRUARY, 1));
-        assertNotEquals(medP1.getEndDate(), new Date(2021, Calendar.JANUARY, 1));
+        medP1.setEndDate(new Date(2021-1900, Calendar.FEBRUARY, 1));
+        assertEquals(medP1.getEndDate(), new Date(2021-1900, Calendar.FEBRUARY, 1));
+        medP2.setEndDate(new Date(2021-1900, Calendar.FEBRUARY, 1));
+        assertNotEquals(medP1.getEndDate(), new Date(2021-1900, Calendar.JANUARY, 1));
         medP1.setEndDate(medP2.getEndDate());
-        assertEquals(medP1.getEndDate(), new Date(2021, Calendar.FEBRUARY, 1));
+        assertEquals(medP1.getEndDate(), new Date(2021-1900, Calendar.FEBRUARY, 1));
     }
 
     @Test

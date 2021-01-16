@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConsultationTerminalTest {
 
-    private static class HNSDoble implements HealthNationalService{
+    private static class HNSDoble implements HealthNationalService {
 
         private static List<ProductSpecification> searchResults = new ArrayList<>();
 
@@ -33,8 +33,6 @@ class ConsultationTerminalTest {
                 Database.put(id,medLine);
             }
         }*/
-
-
 
 
         @Override
@@ -64,11 +62,12 @@ class ConsultationTerminalTest {
             return null;
         }
     }
-    private static class ScheduledAgendaDoble implements ScheduledVisitAgenda{
+
+    private static class ScheduledAgendaDoble implements ScheduledVisitAgenda {
 
         public List<HealthCardID> listPacients;
 
-        public ScheduledAgendaDoble(){
+        public ScheduledAgendaDoble() {
             listPacients = new ArrayList<>();
         }
 
@@ -90,7 +89,7 @@ class ConsultationTerminalTest {
     ConsultationTerminal consultationTerminal;
 
     @BeforeEach
-    public void setUp() throws FormatException {
+    public void setUp() throws FormatException, IncorrectEndingDateException {
         Database = new HashMap<>();
         cataleg = new ArrayList<>();
         visites = new ScheduledAgendaDoble();
@@ -115,22 +114,22 @@ class ConsultationTerminalTest {
     //CREAR BASE DE DADES HNS
 
     @Deprecated
-    public void setDatabase() throws FormatException {
+    public void setDatabase() throws FormatException, IncorrectEndingDateException {
         Database.put(new HealthCardID("BBBBBBBBSI123456111111111111"), new MedicalPrescription(1,
-                new Date(2021-1900, Calendar.JANUARY,1),
-                new Date(2021-1900, Calendar.JANUARY,10)));
+                new Date(2021 - 1900, Calendar.JANUARY, 1),
+                new Date(2021 - 1900, Calendar.JANUARY, 10)));
         Database.put(new HealthCardID("BBBBBBBBSI000345111181111111"), new MedicalPrescription(1,
-                new Date(2021-1900, Calendar.JANUARY,1),
-                new Date(2021-1900, Calendar.FEBRUARY,1)));
+                new Date(2021 - 1900, Calendar.JANUARY, 1),
+                new Date(2021 - 1900, Calendar.FEBRUARY, 1)));
         Database.put(new HealthCardID("BBBBBBBBSI123226111111111011"), new MedicalPrescription(1,
-                new Date(2021-1900, Calendar.FEBRUARY,1),
-                new Date(2021-1900, Calendar.MARCH,1)));
+                new Date(2021 - 1900, Calendar.FEBRUARY, 1),
+                new Date(2021 - 1900, Calendar.MARCH, 1)));
         Database.put(new HealthCardID("BBBBBBBBRR456111111149311111"), new MedicalPrescription(1,
-                new Date(2021-1900, Calendar.MARCH,1),
-                new Date(2021-1900, Calendar.MARCH,15)));
+                new Date(2021 - 1900, Calendar.MARCH, 1),
+                new Date(2021 - 1900, Calendar.MARCH, 15)));
         Database.put(new HealthCardID("BBBBBBBBXI123006111111111111"), new MedicalPrescription(1,
-                new Date(2021-1900, Calendar.APRIL,1),
-                new Date(2021-1900, Calendar.MAY,1)));
+                new Date(2021 - 1900, Calendar.APRIL, 1),
+                new Date(2021 - 1900, Calendar.MAY, 1)));
     }
 
     //CREAR CATÀLEG PRODUCTES
@@ -169,15 +168,16 @@ class ConsultationTerminalTest {
     void initPrescriptionEdition() throws HealthCardException, ConnectException, NotValidePrescriptionException, FormatException, NotFinishedTreatmentException, AnyCurrentPrescriptionException {
         consultationTerminal.initRevision();
         MedicalPrescription current = Database.get(consultationTerminal.getPacient());
-        System.out.println(current.getEndDate() + "New date: "+new Date());
+        System.out.println(current.getEndDate() + "New date: " + new Date());
         consultationTerminal.initRevision();
         current = Database.get(consultationTerminal.getPacient());
-        System.out.println(current.getEndDate() + "New date: "+new Date());
+        System.out.println(current.getEndDate() + "New date: " + new Date());
         NotFinishedTreatmentException thrown = assertThrows(NotFinishedTreatmentException.class, () -> consultationTerminal.initPrescriptionEdition(),
                 "Medical prescription is in progress");
         assertTrue(thrown.getMessage().contains("Medical prescription is in progress"));
     }
 
+/*
     @Test
     void searchForProducts() {
     }
@@ -201,5 +201,7 @@ class ConsultationTerminalTest {
     @Test
     void printePresc() {
     }
+    */
+
 
 }
