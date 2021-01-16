@@ -15,19 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MedicalPrescriptionTest {
 
-    MedicalPrescription medP1;
-    MedicalPrescription medP2;
-    MedicinePrescriptionLine medL1;
-    MedicinePrescriptionLine medL2;
+    MedicalPrescription medP1, medP2;
+    MedicinePrescriptionLine medL1, medL2;
     List<MedicinePrescriptionLine> medList;
-    String[] instruc1;
-    String[] instruc2;
-    String[] instruc3;
-    String[] instruc4;
-    String[] instruc5;
-    String[] instruc6;
-    String[] instruc7;
-    String[] instruc8;
+    String[] instruc1, instruc2, instruc3, instruc4;
+    String[] instruc5, instruc6, instruc7, instruc8;
 
     @BeforeEach
     @Deprecated

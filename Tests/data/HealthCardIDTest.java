@@ -8,17 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HealthCardIDTest {
 
-    HealthCardID healthcard1, healthcard11,healthcard12;
+    HealthCardID healthcard1, healthcard11, healthcard12;
 
-
-    {
-        try {
-            healthcard1 = new HealthCardID("BBBBBBBBQR648597807024000012");
-            healthcard11 = new HealthCardID("BBBBBBBBQR648597807024000013");
-            healthcard12 = new HealthCardID("BBBBBBBBQR648597807024000011");
-        } catch (FormatException e) {
-            e.printStackTrace();
-        }
+    @BeforeEach
+    void setUp() throws FormatException {
+        healthcard1 = new HealthCardID("BBBBBBBBQR648597807024000012");
+        healthcard11 = new HealthCardID("BBBBBBBBQR648597807024000013");
+        healthcard12 = new HealthCardID("BBBBBBBBQR648597807024000011");
     }
 
     @Test
@@ -38,14 +34,12 @@ class HealthCardIDTest {
         assertTrue(thrown.getMessage().contains("PersonalID code from HealthCardID is invalid"));
     }
 
-
     @Test
     void testEquals() {
         assertEquals(healthcard1, healthcard1);
         assertNotEquals(healthcard11, healthcard1);
         assertNotEquals(healthcard11, healthcard12);
     }
-
 
     @Test
     void allDigits() {
@@ -64,12 +58,6 @@ class HealthCardIDTest {
         assertNotEquals(healthcard1.toString(), "HealthCardID{ " + "personal code= " + healthcard11.getPersonalID() + "}");
         assertNotEquals(healthcard11.toString(), "HealthCardID{ " + "personal code= " + healthcard12.getPersonalID() + "}");
     }
-
-    /*
-    @Test
-    void testHashCode() {
-    }
-    */
 
     private char[] initArray(String code) {
         char[] array = new char[28];

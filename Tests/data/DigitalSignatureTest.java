@@ -1,5 +1,6 @@
 package data;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,17 +16,14 @@ class DigitalSignatureTest {
     DigitalSignature eSign21;
     DigitalSignature eSign31;
 
-    {
-        try {
-            eSign1 = new DigitalSignature("12353");
-            eSign2 = new DigitalSignature("12abz345");
-            eSign3 = new DigitalSignature("abcde");
-            eSign11 = new DigitalSignature("12353");
-            eSign21 = new DigitalSignature("12abz345");
-            eSign31 = new DigitalSignature("abcde1");
-        } catch (eSignatureException e) {
-            e.printStackTrace();
-        }
+    @BeforeEach
+    void setUp() throws eSignatureException {
+        eSign1 = new DigitalSignature("12353");
+        eSign2 = new DigitalSignature("12abz345");
+        eSign3 = new DigitalSignature("abcde");
+        eSign11 = new DigitalSignature("12353");
+        eSign21 = new DigitalSignature("12abz345");
+        eSign31 = new DigitalSignature("abcde1");
     }
 
     @Test
@@ -33,11 +31,11 @@ class DigitalSignatureTest {
         assertTrue(eSign1.checkSign("12353"));
         assertTrue(eSign2.checkSign("12abz345"));
         assertTrue(eSign3.checkSign("abcde"));
-        eSignatureException thrown = assertThrows(eSignatureException.class, () -> new DigitalSignature (""), "Invalid Signature");
+        eSignatureException thrown = assertThrows(eSignatureException.class, () -> new DigitalSignature(""), "Invalid Signature");
         assertTrue(thrown.getMessage().contains("Invalid Signature"));
         thrown = assertThrows(eSignatureException.class, () -> new DigitalSignature(null), "Invalid Signature");
         assertTrue(thrown.getMessage().contains("Invalid Signature"));
-        thrown = assertThrows(eSignatureException.class, () -> new DigitalSignature ("Ó"), "Invalid Signature");
+        thrown = assertThrows(eSignatureException.class, () -> new DigitalSignature("Ó"), "Invalid Signature");
         assertTrue(thrown.getMessage().contains("Invalid Signature"));
     }
 
@@ -56,7 +54,7 @@ class DigitalSignatureTest {
             assertEquals(eSign3.getsignature()[i], bytesESign3[i]);
         }
         assertNotEquals(eSign2.getsignature(), new byte[]{});
-        assertNotEquals(eSign2.getsignature(), new byte[]{61,62,67,65,66,68});
+        assertNotEquals(eSign2.getsignature(), new byte[]{61, 62, 67, 65, 66, 68});
     }
 
     @Test

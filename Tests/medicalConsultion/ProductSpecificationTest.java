@@ -2,7 +2,6 @@ package medicalConsultion;
 
 import Exceptions.FormatException;
 import data.ProductID;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,6 @@ class ProductSpecificationTest {
         productSpec1 = new ProductSpecification(productID1, new BigDecimal("23.5"), "Mal de panxa");
         productSpec2 = new ProductSpecification(productID2, new BigDecimal("23.5"), "Mal de cap");
         productSpec3 = new ProductSpecification(productID3, new BigDecimal("24.5"), "Mal de panxa");
-
         productSpec11 = new ProductSpecification(productID1, new BigDecimal("23.5"), "Mal de panxa");
         productSpec12 = new ProductSpecification(productID2, new BigDecimal("23.5"), "Mal de cap");
         productSpec13 = new ProductSpecification(productID3, new BigDecimal("24.5"), "Mal de panxa");
@@ -42,27 +40,26 @@ class ProductSpecificationTest {
         assertNotEquals(productSpec1, productSpec3);
         assertNotEquals(productSpec2, productSpec3);
         assertNotEquals(productSpec2, null);
-        assertEquals(productSpec1,productSpec11);
+        assertEquals(productSpec1, productSpec11);
         assertEquals(productSpec2, productSpec12);
-        assertEquals(productSpec3,productSpec13);
-
+        assertEquals(productSpec3, productSpec13);
     }
 
     @Test
-    public void setId(){
+    public void setId() {
         productSpec1.setId(productID2);
         assertNotEquals(productSpec1, productSpec2);
     }
 
     @Test
-    public void setPrice(){
+    public void setPrice() {
         productSpec1.setId(productID3);
         productSpec1.setPrice(new BigDecimal("24.5"));
         assertEquals(productSpec1, productSpec3);
     }
 
     @Test
-    public void setDescription(){
+    public void setDescription() {
         productSpec1.setId(productID2);
         productSpec1.setDescription("Mal de cap");
         assertEquals(productSpec1, productSpec2);
@@ -71,22 +68,21 @@ class ProductSpecificationTest {
     @Test
     public void getId() {
         assertEquals(productSpec1.getId(), productID1);
-        assertNotEquals(productID1.getProductID(), productID2);
+        assertEquals(productSpec2.getId(), productID2);
+        assertNotEquals(productSpec1.getId(), productSpec2.getId());
     }
 
     @Test
     public void getPrice() {
         assertEquals(productSpec1.getPrice(), new BigDecimal("23.5"));
         assertNotEquals(productSpec2.getPrice(), new BigDecimal("0"));
+        assertNotEquals(productSpec1.getPrice(), productSpec3.getPrice());
     }
 
     @Test
     public void getDescription() {
         assertEquals(productSpec2.getDescription(), "Mal de cap");
         assertEquals(productSpec1.getDescription(), "Mal de panxa");
+        assertNotEquals(productSpec1.getDescription(), productSpec2.getDescription());
     }
-
-
-
-
 }

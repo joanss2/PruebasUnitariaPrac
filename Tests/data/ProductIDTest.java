@@ -1,6 +1,7 @@
 package data;
 
 import Exceptions.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,16 +10,10 @@ class ProductIDTest {
 
     ProductID product1, product2;
 
-
-    {
-        try {
-            product1 = new ProductID("AABEC");
-            product2 = new ProductID("AURON");
-
-
-        } catch (FormatException e) {
-            e.printStackTrace();
-        }
+    @BeforeEach
+    void setUp() throws FormatException {
+        product1 = new ProductID("AABEC");
+        product2 = new ProductID("AURON");
     }
 
     @Test
@@ -30,7 +25,6 @@ class ProductIDTest {
         assertTrue(thrown.getMessage().contains("UPCcode from  ProductID is invalid"));
         thrown = assertThrows(FormatException.class, () -> new ProductID("BRRR0"), "UPCcode from  ProductID is invalid");
         assertTrue(thrown.getMessage().contains("UPCcode from  ProductID is invalid"));
-
     }
 
     @Test
@@ -52,9 +46,4 @@ class ProductIDTest {
         assertNotEquals(product2.toString(), "Product{ ProductID= " + product1.getProductID() + " }");
 
     }
-    /*
-    @Test
-    void testHashCode() {
-    }
-    */
 }

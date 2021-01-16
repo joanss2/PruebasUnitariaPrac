@@ -1,14 +1,11 @@
 package medicalConsultion;
 
-import Exceptions.FormatException;
-import data.ProductID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TakingGuidelineTest {
-
 
     TakingGuideline instruc1;
     TakingGuideline instruc2;
@@ -79,5 +76,4 @@ class TakingGuidelineTest {
         assertNotEquals(new TakingGuideline(dayMoment.BEFOREDINNER, 69f, "Mal de cap", 2f, 5f, FqUnit.MONTH), instruc1);
         assertNotEquals(new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de panxa", 2f, 4f, FqUnit.DAY), instruc2);
     }
-
 }
