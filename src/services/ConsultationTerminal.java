@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ConsultationTerminal {
 
-    private HealthNationalService HNS;
-    private ScheduledVisitAgenda VisitesProgramades;
+    public HealthNationalService HNS;
+    public ScheduledVisitAgenda VisitesProgramades;
     private DigitalSignature eSign;
     private HealthCardID pacient;
     private MedicalPrescription medicalPrescription;

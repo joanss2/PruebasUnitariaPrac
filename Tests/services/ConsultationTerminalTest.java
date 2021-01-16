@@ -21,7 +21,7 @@ class ConsultationTerminalTest {
     private static class HNSDoble implements HealthNationalService{
 
         private static List<ProductSpecification> searchResults = new ArrayList<>();
-
+/*
         public void add_product_to_catalog(ProductSpecification product){
             if(!cataleg.contains(product)){
                 cataleg.add(product);
@@ -33,6 +33,9 @@ class ConsultationTerminalTest {
                 Database.put(id,medLine);
             }
         }
+
+        */
+
 
         @Override
         public MedicalPrescription getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException {
@@ -63,7 +66,7 @@ class ConsultationTerminalTest {
     }
     private static class ScheduledAgendaDoble implements ScheduledVisitAgenda{
 
-        private List<HealthCardID> listPacients;
+        public List<HealthCardID> listPacients;
 
         public ScheduledAgendaDoble(){
             listPacients = new ArrayList<>();
@@ -93,18 +96,20 @@ class ConsultationTerminalTest {
         visites = new ScheduledAgendaDoble();
         Health = new HNSDoble();
         consultationTerminal = new ConsultationTerminal();
+        consultationTerminal.VisitesProgramades = visites;
+        consultationTerminal.HNS = Health;
         setVisites();
         setCataleg();
-        //setDatabase();
+        setDatabase();
     }
 
+    @Test
     public void setVisites() throws FormatException {
         visites.add_pacient(new HealthCardID("BBBBBBBBSI123456111111111111"));
         visites.add_pacient(new HealthCardID("BBBBBBBBSI000345111181111111"));
         visites.add_pacient(new HealthCardID("BBBBBBBBSI123226111111111011"));
         visites.add_pacient(new HealthCardID("BBBBBBBBRR456111111149311111"));
         visites.add_pacient(new HealthCardID("BBBBBBBBXI123006111111111111"));
-        //System.out.println(visites);
     }
 
     //CREAR BASE DE DADES HNS
@@ -154,7 +159,7 @@ class ConsultationTerminalTest {
         consultationTerminal.initRevision();
         assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI123456111111111111"));
     }
-
+/*
     @Test
     void initPrescriptionEdition() {
     }
@@ -182,4 +187,6 @@ class ConsultationTerminalTest {
     @Test
     void printePresc() {
     }
+    */
+
 }
