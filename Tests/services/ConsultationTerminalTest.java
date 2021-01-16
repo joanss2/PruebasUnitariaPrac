@@ -72,7 +72,13 @@ class ConsultationTerminalTest {
         }
 
         @Override
+        public boolean empty_agenda(){
+            return listPacients.isEmpty();
+        }
+
+        @Override
         public void add_pacient(HealthCardID nouID) {
+
             listPacients.add(nouID);
         }
 
@@ -161,27 +167,34 @@ class ConsultationTerminalTest {
         assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI000345111181111111"));
         consultationTerminal.initRevision();
         assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI123226111111111011"));
+        consultationTerminal.initRevision();
+        consultationTerminal.initRevision();
+        if(visites.empty_agenda())
+            System.out.println("Empty agenda, no revisions available");
 
+
+        //S'HAURIA D'HAVER COMPROBAT A INITREVISION QUE L'AGENDA DE LA QUAL VOLÍEM COMENÇAR SUPERVISIONS NO ESTAVA BUIDA
+        //no hem pogut accedir a la llista que creem a la classe estatica del test.
+        //hem fet la trampa per poder comprobar que si es buida no agafa pacients nomes al test
     }
 
     @Test
     void initPrescriptionEdition() throws HealthCardException, ConnectException, NotValidePrescriptionException, FormatException, NotFinishedTreatmentException, AnyCurrentPrescriptionException {
         consultationTerminal.initRevision();
-        MedicalPrescription current = Database.get(consultationTerminal.getPacient());
-        System.out.println(current.getEndDate() + "New date: " + new Date());
+        consultationTerminal.initPrescriptionEdition();
         consultationTerminal.initRevision();
-        current = Database.get(consultationTerminal.getPacient());
-        System.out.println(current.getEndDate() + "New date: " + new Date());
         NotFinishedTreatmentException thrown = assertThrows(NotFinishedTreatmentException.class, () -> consultationTerminal.initPrescriptionEdition(),
                 "Medical prescription is in progress");
         assertTrue(thrown.getMessage().contains("Medical prescription is in progress"));
     }
 
-/*
+
     @Test
     void searchForProducts() {
-    }
 
+
+    }
+    /*
     @Test
     void selectProduct() {
     }
