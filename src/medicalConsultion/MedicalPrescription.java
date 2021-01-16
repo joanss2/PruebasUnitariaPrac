@@ -3,6 +3,7 @@ package medicalConsultion;
 import Exceptions.IncorrectTakingGuidelinesException;
 import Exceptions.ProductNotInPrescription;
 import Exceptions.ProductAlreadyInPrescription;
+import data.DigitalSignature;
 import data.ProductID;
 import Exceptions.*;
 
@@ -14,6 +15,7 @@ public class MedicalPrescription {
     private Date prescDate;
     private Date endDate;
     private final List<MedicinePrescriptionLine> liniesDePrescripcio;
+    public DigitalSignature eSign;
 
     // Its components, that is, the set of medical prescription lines
     //@Deprecated
@@ -130,6 +132,10 @@ public class MedicalPrescription {
 
     public void setEndDate(Date newEndDate) {
         this.endDate = newEndDate;
+    }
+
+    public void setSignature(DigitalSignature eSign){
+        this.eSign = eSign;
     }
 
 }

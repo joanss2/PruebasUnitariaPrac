@@ -1,12 +1,14 @@
 package services;
 
 import Exceptions.*;
+import data.DigitalSignature;
 import data.HealthCardID;
 import data.ProductID;
 import medicalConsultion.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.util.*;
@@ -122,7 +124,6 @@ class ConsultationTerminalTest {
     }
 
     //CREAR CATÀLEG PRODUCTES
-
     public void setCataleg() throws FormatException {
         cataleg.add(new ProductSpecification(new ProductID("ABCDE"), new BigDecimal("13.25"),
                 "Método anticonceptivo"));
@@ -251,14 +252,19 @@ class ConsultationTerminalTest {
     void sendePrescription() throws HealthCardException, ConnectException, NotValidePrescriptionException, FormatException,
             NotFinishedTreatmentException, AnyCurrentPrescriptionException, AnyKeyWordMedicineException,
             AnyMedicineSearchException, ProductAlreadyInPrescription, AnySelectedMedicineException,
-            IncorrectTakingGuidelinesException, IncorrectEndingDateException {
+            IncorrectTakingGuidelinesException, IncorrectEndingDateException, NotCompletedMedicalPrescription, NotValidePrescription, eSignatureException {
 
         consultationTerminal.initRevision();
+        HealthCardID pacientID = consultationTerminal.getPacient();
         consultationTerminal.initPrescriptionEdition();
         consultationTerminal.searchForProducts("DALSY");
         consultationTerminal.selectProduct(1);
         consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"});
         consultationTerminal.enterTreatmentEndingDate(new Date(2022-1900,Calendar.MARCH,3));
+        consultationTerminal.eSign = new DigitalSignature("12353");
+        consultationTerminal.sendePrescription();
+        Database.replace(pacientID, Health.sendePrescription(consultationTerminal.medicalPrescription));
+        assertEquals(Database.get(pacientID), consultationTerminal.medicalPrescription);
     }
 
     @Test
@@ -268,7 +274,4 @@ class ConsultationTerminalTest {
         assertTrue(thrown.getMessage().contains("No prescription object"));
 
     }
-
-
-
 }

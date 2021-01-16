@@ -4,7 +4,6 @@ import Exceptions.*;
 import data.DigitalSignature;
 import data.HealthCardID;
 import medicalConsultion.*;
-
 import java.net.ConnectException;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +12,7 @@ public class ConsultationTerminal {
 
     public HealthNationalService HNS;
     public ScheduledVisitAgenda VisitesProgramades;
-    private DigitalSignature eSign;
+    public DigitalSignature eSign;
     private HealthCardID pacient;
     public MedicalPrescription medicalPrescription;
     public List<ProductSpecification> busqueda;
@@ -80,7 +79,7 @@ public class ConsultationTerminal {
             throw new NotValidePrescription("HNS cannot validate prescription");
         if (eSign == null)
             throw new eSignatureException("No signature");
-
+        medicalPrescription.setSignature(eSign);
         HNS.sendePrescription(medicalPrescription);
     }
 
