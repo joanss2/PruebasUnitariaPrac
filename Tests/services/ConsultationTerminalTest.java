@@ -3,10 +3,7 @@ package services;
 import Exceptions.*;
 import data.HealthCardID;
 import data.ProductID;
-import medicalConsultion.MedicalPrescription;
-import medicalConsultion.MedicinePrescriptionLine;
-import medicalConsultion.ProductSpecification;
-import medicalConsultion.dayMoment;
+import medicalConsultion.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -201,8 +198,6 @@ class ConsultationTerminalTest {
         AnyKeyWordMedicineException thrown = assertThrows(AnyKeyWordMedicineException.class, () -> consultationTerminal.searchForProducts("KOALA"),
                 "Results not found in the list returned by HNS");
         assertTrue(thrown.getMessage().contains("Results not found in the list returned by HNS"));
-
-
     }
 
     @Test
@@ -217,13 +212,31 @@ class ConsultationTerminalTest {
         consultationTerminal.selectProduct(1);
         assertEquals(new ProductSpecification(new ProductID("DALSY"), new BigDecimal("8.75"),
                 "Antidepresivo"),consultationTerminal.medicament);
+    }
 
+    @Test
+    void enterMedicineGuidelines() throws AnySelectedMedicineException, AnyKeyWordMedicineException, ConnectException,
+            AnyMedicineSearchException, IncorrectTakingGuidelinesException, ProductAlreadyInPrescription, FormatException,
+            NotValidePrescriptionException, HealthCardException, NotFinishedTreatmentException, AnyCurrentPrescriptionException {
+
+
+        AnySelectedMedicineException thrown = assertThrows(AnySelectedMedicineException.class, () ->
+                        consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"}),
+                "No Medicine selected");
+        assertTrue(thrown.getMessage().contains("No Medicine selected"));
+        consultationTerminal.initRevision();
+        consultationTerminal.initPrescriptionEdition();
+        consultationTerminal.searchForProducts("DALSY");
+        consultationTerminal.selectProduct(1);
+        List<MedicinePrescriptionLine> lines = new ArrayList<>();
+        lines.add(new MedicinePrescriptionLine(new ProductID("DALSY"),
+                consultationTerminal.medicalPrescription.fromString(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"})));
+
+
+        consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"});
+        assertEquals(consultationTerminal.medicalPrescription.getMedicinePrescriptionLineList(),lines);
     }
 /*
-    @Test
-    void enterMedicineGuidelines() {
-    }
-
     @Test
     void enterTreatmentEndingDate() {
     }

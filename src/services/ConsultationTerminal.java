@@ -15,7 +15,7 @@ public class ConsultationTerminal {
     public ScheduledVisitAgenda VisitesProgramades;
     private DigitalSignature eSign;
     private HealthCardID pacient;
-    private MedicalPrescription medicalPrescription;
+    public MedicalPrescription medicalPrescription;
     public List<ProductSpecification> busqueda;
     public ProductSpecification medicament;
 
@@ -60,7 +60,7 @@ public class ConsultationTerminal {
 
     public void enterMedicineGuidelines(String[] instruc) throws
             AnySelectedMedicineException, IncorrectTakingGuidelinesException, ProductAlreadyInPrescription {
-        if (medicament.getId() == null)
+        if (medicament == null)
             throw new AnySelectedMedicineException("No Medicine selected");
         medicalPrescription.addLine(medicament.getId(), instruc);
     }
