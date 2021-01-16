@@ -4,6 +4,7 @@ import Exceptions.IncorrectTakingGuidelinesException;
 import Exceptions.ProductNotInPrescription;
 import Exceptions.ProductAlreadyInPrescription;
 import data.ProductID;
+import Exceptions.*;
 
 import java.util.*;
 
@@ -16,10 +17,13 @@ public class MedicalPrescription {
 
     // Its components, that is, the set of medical prescription lines
     //@Deprecated
-    public MedicalPrescription(int prescCode, Date prescDate, Date endDate) {
+    public MedicalPrescription(int prescCode, Date prescDate, Date endDate) throws IncorrectEndingDateException {
         this.prescCode = prescCode;
         this.prescDate = prescDate;
         this.endDate = endDate;
+
+        if(this.prescDate.after(this.endDate))
+            throw new IncorrectEndingDateException("End date is after prescription date");
         liniesDePrescripcio = new ArrayList<>();
     }
 

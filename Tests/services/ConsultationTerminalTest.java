@@ -117,20 +117,20 @@ class ConsultationTerminalTest {
     @Deprecated
     public void setDatabase() throws FormatException {
         Database.put(new HealthCardID("BBBBBBBBSI123456111111111111"), new MedicalPrescription(1,
-                new Date(2021, Calendar.JANUARY,1),
-                new Date(2021, Calendar.JANUARY,10)));
+                new Date(2021-1900, Calendar.JANUARY,1),
+                new Date(2021-1900, Calendar.JANUARY,10)));
         Database.put(new HealthCardID("BBBBBBBBSI000345111181111111"), new MedicalPrescription(1,
-                new Date(2021, Calendar.JANUARY,1),
-                new Date(2021, Calendar.FEBRUARY,1)));
+                new Date(2021-1900, Calendar.JANUARY,1),
+                new Date(2021-1900, Calendar.FEBRUARY,1)));
         Database.put(new HealthCardID("BBBBBBBBSI123226111111111011"), new MedicalPrescription(1,
-                new Date(2021, Calendar.FEBRUARY,1),
-                new Date(2021, Calendar.MARCH,1)));
+                new Date(2021-1900, Calendar.FEBRUARY,1),
+                new Date(2021-1900, Calendar.MARCH,1)));
         Database.put(new HealthCardID("BBBBBBBBRR456111111149311111"), new MedicalPrescription(1,
-                new Date(2021, Calendar.MARCH,1),
-                new Date(2021, Calendar.MARCH,15)));
+                new Date(2021-1900, Calendar.MARCH,1),
+                new Date(2021-1900, Calendar.MARCH,15)));
         Database.put(new HealthCardID("BBBBBBBBXI123006111111111111"), new MedicalPrescription(1,
-                new Date(2021, Calendar.APRIL,1),
-                new Date(2021, Calendar.MAY,1)));
+                new Date(2021-1900, Calendar.APRIL,1),
+                new Date(2021-1900, Calendar.MAY,1)));
     }
 
     //CREAR CATÀLEG PRODUCTES
@@ -164,9 +164,18 @@ class ConsultationTerminalTest {
         assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI123226111111111011"));
 
     }
-/*
+
     @Test
-    void initPrescriptionEdition() {
+    void initPrescriptionEdition() throws HealthCardException, ConnectException, NotValidePrescriptionException, FormatException, NotFinishedTreatmentException, AnyCurrentPrescriptionException {
+        consultationTerminal.initRevision();
+        MedicalPrescription current = Database.get(consultationTerminal.getPacient());
+        System.out.println(current.getEndDate() + "New date: "+new Date());
+        consultationTerminal.initRevision();
+        current = Database.get(consultationTerminal.getPacient());
+        System.out.println(current.getEndDate() + "New date: "+new Date());
+        NotFinishedTreatmentException thrown = assertThrows(NotFinishedTreatmentException.class, () -> consultationTerminal.initPrescriptionEdition(),
+                "Medical prescription is in progress");
+        assertTrue(thrown.getMessage().contains("Medical prescription is in progress"));
     }
 
     @Test
@@ -192,6 +201,5 @@ class ConsultationTerminalTest {
     @Test
     void printePresc() {
     }
-    */
 
 }
