@@ -51,7 +51,7 @@ class ProductSpecificationTest {
     @Test
     public void setId(){
         productSpec1.setId(productID2);
-        assertEquals(productSpec1, productSpec2);
+        assertNotEquals(productSpec1, productSpec2);
     }
 
     @Test
@@ -82,8 +82,8 @@ class ProductSpecificationTest {
 
     @Test
     public void getDescription() {
-        assertEquals(productSpec2.getDescription(), "Per a mals de cap");
-        assertEquals(productSpec1.getDescription(), "Per a mals de panxa");
+        assertEquals(productSpec2.getDescription(), "Mal de cap");
+        assertEquals(productSpec1.getDescription(), "Mal de panxa");
     }
 
 
