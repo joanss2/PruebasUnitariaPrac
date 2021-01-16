@@ -21,8 +21,8 @@ class ConsultationTerminalTest {
     private static class HNSDoble implements HealthNationalService{
 
         private static List<ProductSpecification> searchResults = new ArrayList<>();
-/*
-        public void add_product_to_catalog(ProductSpecification product){
+
+       /* public void add_product_to_catalog(ProductSpecification product){                     //MIRAR SI IMPLEMENTAR O NO
             if(!cataleg.contains(product)){
                 cataleg.add(product);
             }
@@ -32,9 +32,9 @@ class ConsultationTerminalTest {
             if(!Database.containsKey(id)){
                 Database.put(id,medLine);
             }
-        }
+        }*/
 
-        */
+
 
 
         @Override
@@ -158,6 +158,11 @@ class ConsultationTerminalTest {
     void initRevision() throws HealthCardException, ConnectException, NotValidePrescriptionException, FormatException {
         consultationTerminal.initRevision();
         assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI123456111111111111"));
+        consultationTerminal.initRevision();
+        assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI000345111181111111"));
+        consultationTerminal.initRevision();
+        assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI123226111111111011"));
+
     }
 /*
     @Test
