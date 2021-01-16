@@ -16,8 +16,8 @@ public class ConsultationTerminal {
     private DigitalSignature eSign;
     private HealthCardID pacient;
     private MedicalPrescription medicalPrescription;
-    private List<ProductSpecification> busqueda;
-    private ProductSpecification medicament;
+    public List<ProductSpecification> busqueda;
+    public ProductSpecification medicament;
 
     public void initRevision() throws
             NotValidePrescriptionException, ConnectException, FormatException, HealthCardException {
@@ -42,6 +42,8 @@ public class ConsultationTerminal {
 
     public void searchForProducts(String keyWord) throws
             AnyKeyWordMedicineException, ConnectException {
+        if(busqueda != null && !busqueda.isEmpty())
+            busqueda.clear();
         busqueda = HNS.getProductsByKW(keyWord);
         if (busqueda.isEmpty())
             throw new AnyKeyWordMedicineException("Results not found in the list returned by HNS");
@@ -52,7 +54,7 @@ public class ConsultationTerminal {
         if (busqueda == null)
             throw new AnyMedicineSearchException("Search has not been started");
         if (option <= busqueda.size())                   // The doctor chooses an option between 1 and busqueda size
-            medicament = busqueda.get(option - 1);
+            this.medicament = HNS.getProductSpecific(option);
     }
 
 

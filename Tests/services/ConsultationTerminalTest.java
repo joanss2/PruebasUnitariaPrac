@@ -42,7 +42,6 @@ class ConsultationTerminalTest {
 
         @Override
         public List<ProductSpecification> getProductsByKW(String keyWord) throws AnyKeyWordMedicineException, ConnectException {
-            //List<ProductSpecification> result = new ArrayList<>();
             for (ProductSpecification pr : cataleg) {
                 if (pr.getId().getProductID().contains(keyWord))
                     //result.add(pr);
@@ -54,7 +53,7 @@ class ConsultationTerminalTest {
 
         @Override
         public ProductSpecification getProductSpecific(int opt) throws AnyMedicineSearchException, ConnectException {
-            return searchResults.get(opt);
+            return searchResults.get(opt-1);
         }
 
         @Override
@@ -147,7 +146,7 @@ class ConsultationTerminalTest {
                 "Antinflamatorio"));
         cataleg.add(new ProductSpecification(new ProductID("INTEL"), new BigDecimal("15.00"),
                 "Crema"));
-        cataleg.add(new ProductSpecification(new ProductID("DUREX"), new BigDecimal("9.25"),
+        cataleg.add(new ProductSpecification(new ProductID("DAREX"), new BigDecimal("9.25"),
                 "Para la piel atópica"));
         cataleg.add(new ProductSpecification(new ProductID("MONTS"), new BigDecimal("25.99"),
                 "No consumir más de una vez al dia"));
@@ -190,15 +189,37 @@ class ConsultationTerminalTest {
 
 
     @Test
-    void searchForProducts() {
+    void searchForProducts() throws AnyKeyWordMedicineException, ConnectException, FormatException {
+        consultationTerminal.searchForProducts("DA");
+        List<ProductSpecification> search = new ArrayList<>();
+        search.add(new ProductSpecification(new ProductID("DAREX"), new BigDecimal("9.25"),
+                "Para la piel atópica"));
+        search.add(new ProductSpecification(new ProductID("DALSY"), new BigDecimal("8.75"),
+                "Antidepresivo"));
+
+        assertEquals(consultationTerminal.busqueda,search);
+        AnyKeyWordMedicineException thrown = assertThrows(AnyKeyWordMedicineException.class, () -> consultationTerminal.searchForProducts("KOALA"),
+                "Results not found in the list returned by HNS");
+        assertTrue(thrown.getMessage().contains("Results not found in the list returned by HNS"));
 
 
     }
-    /*
+
     @Test
-    void selectProduct() {
-    }
+    void selectProduct() throws AnyMedicineSearchException, ConnectException, AnyKeyWordMedicineException, FormatException {
+        AnyMedicineSearchException thrown = assertThrows(AnyMedicineSearchException.class, () -> consultationTerminal.selectProduct(1),
+                "Search has not been started");
+        assertTrue(thrown.getMessage().contains("Search has not been started"));
 
+        assertNull(consultationTerminal.busqueda);
+
+        consultationTerminal.searchForProducts("DALSY");
+        consultationTerminal.selectProduct(1);
+        assertEquals(new ProductSpecification(new ProductID("DALSY"), new BigDecimal("8.75"),
+                "Antidepresivo"),consultationTerminal.medicament);
+
+    }
+/*
     @Test
     void enterMedicineGuidelines() {
     }
