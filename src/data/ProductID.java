@@ -7,13 +7,13 @@ final public class ProductID {
     private final String UPCcode;
 
     public ProductID(String upc) throws FormatException {
-        if (!comprovar_upc(upc)) {                                                  // Comprove code from the product
+        if (!comprovarUpc(upc)) {                                                  // Comprove code from the product
             throw new FormatException("UPCcode from  ProductID is invalid");
         }
         this.UPCcode = upc;
     }
 
-    public boolean comprovar_upc(String upc) {
+    public boolean comprovarUpc(String upc) {
         if (upc.length() != 5)
             return false;
         char[] stringToArray = upc.toCharArray();

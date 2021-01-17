@@ -19,7 +19,6 @@ final public class DigitalSignature {
         for (int i = 0; i < signature.length(); i++) {
             if ((int) signature.charAt(i) > 128)                            // We don't check that is less than -127 because don't transform to negative values
                 throw new eSignatureException("Invalid Signature");
-
         }
         return true;
     }

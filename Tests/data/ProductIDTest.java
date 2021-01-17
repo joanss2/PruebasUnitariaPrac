@@ -29,8 +29,8 @@ class ProductIDTest {
 
     @Test
     void comprovar_upc() {                                                      // Comprove code
-        assertTrue(product1.comprovar_upc(product1.getProductID()));
-        assertFalse(product1.comprovar_upc("XQC23"));
+        assertTrue(product1.comprovarUpc(product1.getProductID()));
+        assertFalse(product1.comprovarUpc("XQC23"));
     }
 
     @Test

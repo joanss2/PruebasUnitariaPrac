@@ -80,7 +80,7 @@ public class ConsultationTerminal {
         if (eSign == null)
             throw new eSignatureException("No signature");
         medicalPrescription.setSignature(eSign);
-        HNS.sendePrescription(medicalPrescription);
+        this.medicalPrescription = HNS.sendePrescription(medicalPrescription);
     }
 
     public void printePresc() throws printingException {
