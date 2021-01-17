@@ -52,7 +52,7 @@ public class ConsultationTerminal {
             AnyMedicineSearchException, ConnectException {
         if (busqueda == null)
             throw new AnyMedicineSearchException("Search has not been started");
-        if (option <= busqueda.size())                                                              // The doctor chooses an option between 1 and busqueda size
+        if (!busqueda.isEmpty() && option <= busqueda.size())                                                              // The doctor chooses an option between 1 and busqueda size
             this.medicament = HNS.getProductSpecific(option);
     }
 
