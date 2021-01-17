@@ -9,16 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MedicinePrescriptionLineTest {
 
-    MedicinePrescriptionLine medLine1, medLine2;
+    MedicinePrescriptionLine medLine1, medLine2;                                            // Declaration
 
     @BeforeEach
-    void setUp() throws FormatException {
+    void setUp() throws FormatException {                                                           // Inicialization
         medLine1 = new MedicinePrescriptionLine(new ProductID("ABCDE"), new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de panxa", 2f, 4f, FqUnit.DAY));
         medLine2 = new MedicinePrescriptionLine(new ProductID("BBSIT"), new TakingGuideline(dayMoment.AFTERDINNER, 40f, "Mal de cap", 20f, 10f, FqUnit.DAY));
     }
 
     @Test
-    void getId() throws FormatException {
+    void getId() throws FormatException {                                                     // Getter
         assertEquals(medLine1.getId(), new ProductID("ABCDE"));
         assertNotEquals(medLine1.getId(), new ProductID("ABCDF"));
         assertEquals(medLine2.getId(), new ProductID("BBSIT"));
@@ -37,7 +37,7 @@ class MedicinePrescriptionLineTest {
     }
 
     @Test
-    void getLine() {
+    void getLine() {                                                    // Getter
         assertEquals(new TakingGuideline(dayMoment.AFTERLUNCH, 40f, "Mal de panxa", 2f, 4f, FqUnit.DAY), medLine1.getLine());
         assertEquals(new TakingGuideline(dayMoment.AFTERDINNER, 40f, "Mal de cap", 20f, 10f, FqUnit.DAY), medLine2.getLine());
     }

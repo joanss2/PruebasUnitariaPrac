@@ -7,7 +7,7 @@ final public class ProductID {
     private final String UPCcode;
 
     public ProductID(String upc) throws FormatException {
-        if (!comprovar_upc(upc)) {
+        if (!comprovar_upc(upc)) {                                                  // Comprove code from the product
             throw new FormatException("UPCcode from  ProductID is invalid");
         }
         this.UPCcode = upc;
@@ -38,7 +38,7 @@ final public class ProductID {
     }
 
     public String toString() {
-        return "Product{ " + "ProductID= " + UPCcode + " }";//+ " '\tPrice= "+price+" \tDescription: "+description+" }";
+        return "Product{ " + "ProductID= " + UPCcode + " }";
     }
 
     @Override

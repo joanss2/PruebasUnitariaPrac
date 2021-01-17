@@ -8,7 +8,6 @@ import medicalConsultion.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.util.*;
@@ -17,20 +16,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConsultationTerminalTest {
 
-    private static class HNSDoble implements HealthNationalService {
+    private static class HNSDoble implements HealthNationalService {                                                // HSN doble implementation
 
         private static List<ProductSpecification> searchResults = new ArrayList<>();
 
         @Override
-        public MedicalPrescription getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException {
+        public MedicalPrescription getePrescription(HealthCardID hcID){
             return Database.get(hcID);
         }
 
         @Override
-        public List<ProductSpecification> getProductsByKW(String keyWord) throws AnyKeyWordMedicineException, ConnectException {
+        public List<ProductSpecification> getProductsByKW(String keyWord){
             for (ProductSpecification pr : cataleg) {
                 if (pr.getId().getProductID().contains(keyWord))
-                    //result.add(pr);
                     searchResults.add(pr);
             }
             //return result;
@@ -38,17 +36,17 @@ class ConsultationTerminalTest {
         }
 
         @Override
-        public ProductSpecification getProductSpecific(int opt) throws AnyMedicineSearchException, ConnectException {
-            return searchResults.get(opt-1);
+        public ProductSpecification getProductSpecific(int opt) {
+            return searchResults.get(opt - 1);
         }
 
         @Override
-        public MedicalPrescription sendePrescription(MedicalPrescription ePresc) throws ConnectException, NotValidePrescription, eSignatureException, NotCompletedMedicalPrescription {
+        public MedicalPrescription sendePrescription(MedicalPrescription ePresc){
             return ePresc;
         }
     }
 
-    private static class ScheduledAgendaDoble implements ScheduledVisitAgenda {
+    private static class ScheduledAgendaDoble implements ScheduledVisitAgenda {                                        // ScheduledVisitAgenda doble implementation
 
         public List<HealthCardID> listPacients;
 
@@ -57,7 +55,7 @@ class ConsultationTerminalTest {
         }
 
         @Override
-        public boolean empty_agenda(){
+        public boolean empty_agenda() {
             return listPacients.isEmpty();
         }
 
@@ -73,14 +71,14 @@ class ConsultationTerminalTest {
         }
     }
 
-    public static Map<HealthCardID, MedicalPrescription> Database;
+    public static Map<HealthCardID, MedicalPrescription> Database;                                      // Declaration
     public static List<ProductSpecification> cataleg;
     ScheduledVisitAgenda visites;
     HealthNationalService Health;
     ConsultationTerminal consultationTerminal;
 
     @BeforeEach
-    public void setUp() throws FormatException, IncorrectEndingDateException {
+    public void setUp() throws FormatException, IncorrectEndingDateException {                                  // Inicialization
         Database = new HashMap<>();
         cataleg = new ArrayList<>();
         visites = new ScheduledAgendaDoble();
@@ -94,7 +92,7 @@ class ConsultationTerminalTest {
     }
 
     @Test
-    public void setVisites() throws FormatException {
+    public void setVisites() throws FormatException {                                                       // Visites list
         visites.add_pacient(new HealthCardID("BBBBBBBBSI123456111111111111"));
         visites.add_pacient(new HealthCardID("BBBBBBBBSI000345111181111111"));
         visites.add_pacient(new HealthCardID("BBBBBBBBSI123226111111111011"));
@@ -102,10 +100,9 @@ class ConsultationTerminalTest {
         visites.add_pacient(new HealthCardID("BBBBBBBBXI123006111111111111"));
     }
 
-    //CREAR BASE DE DADES HNS
 
     @Deprecated
-    public void setDatabase() throws FormatException, IncorrectEndingDateException {
+    public void setDatabase() throws FormatException, IncorrectEndingDateException {                                            // DataBase patients
         Database.put(new HealthCardID("BBBBBBBBSI123456111111111111"), new MedicalPrescription(1,
                 new Date(2021 - 1900, Calendar.JANUARY, 1),
                 new Date(2021 - 1900, Calendar.JANUARY, 10)));
@@ -123,8 +120,8 @@ class ConsultationTerminalTest {
                 new Date(2021 - 1900, Calendar.MAY, 1)));
     }
 
-    //CREAR CATÀLEG PRODUCTES
-    public void setCataleg() throws FormatException {
+
+    public void setCataleg() throws FormatException {                                                               // Product Catalog
         cataleg.add(new ProductSpecification(new ProductID("ABCDE"), new BigDecimal("13.25"),
                 "Método anticonceptivo"));
         cataleg.add(new ProductSpecification(new ProductID("VIAGR"), new BigDecimal("19.99"),
@@ -153,13 +150,8 @@ class ConsultationTerminalTest {
         assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI123226111111111011"));
         consultationTerminal.initRevision();
         consultationTerminal.initRevision();
-        if(visites.empty_agenda())
+        if (visites.empty_agenda())
             System.out.println("Empty agenda, no revisions available");
-
-
-        //S'HAURIA D'HAVER COMPROBAT A INITREVISION QUE L'AGENDA DE LA QUAL VOLÍEM COMENÇAR SUPERVISIONS NO ESTAVA BUIDA
-        //no hem pogut accedir a la llista que creem a la classe estatica del test.
-        //hem fet la trampa per poder comprobar que si es buida no agafa pacients nomes al test
     }
 
     @Test
@@ -182,7 +174,7 @@ class ConsultationTerminalTest {
         search.add(new ProductSpecification(new ProductID("DALSY"), new BigDecimal("8.75"),
                 "Antidepresivo"));
 
-        assertEquals(consultationTerminal.busqueda,search);
+        assertEquals(consultationTerminal.busqueda, search);
         AnyKeyWordMedicineException thrown = assertThrows(AnyKeyWordMedicineException.class, () -> consultationTerminal.searchForProducts("KOALA"),
                 "Results not found in the list returned by HNS");
         assertTrue(thrown.getMessage().contains("Results not found in the list returned by HNS"));
@@ -199,7 +191,7 @@ class ConsultationTerminalTest {
         consultationTerminal.searchForProducts("DALSY");
         consultationTerminal.selectProduct(1);
         assertEquals(new ProductSpecification(new ProductID("DALSY"), new BigDecimal("8.75"),
-                "Antidepresivo"),consultationTerminal.medicament);
+                "Antidepresivo"), consultationTerminal.medicament);
     }
 
     @Test
@@ -222,8 +214,9 @@ class ConsultationTerminalTest {
 
 
         consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"});
-        assertEquals(consultationTerminal.medicalPrescription.getMedicinePrescriptionLineList(),lines);
+        assertEquals(consultationTerminal.medicalPrescription.getMedicinePrescriptionLineList(), lines);
     }
+
     @Deprecated
     @Test
     void enterTreatmentEndingDate() throws ProductAlreadyInPrescription, AnySelectedMedicineException, IncorrectTakingGuidelinesException,
@@ -237,11 +230,11 @@ class ConsultationTerminalTest {
         consultationTerminal.searchForProducts("DALSY");
         consultationTerminal.selectProduct(1);
         consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"});
-        consultationTerminal.enterTreatmentEndingDate(new Date(2022-1900,Calendar.MARCH,3));
-        assertEquals(consultationTerminal.medicalPrescription.getEndDate(),new Date(2022-1900,Calendar.MARCH,3));
-        assertNotEquals(old,consultationTerminal.medicalPrescription.getEndDate());
+        consultationTerminal.enterTreatmentEndingDate(new Date(2022 - 1900, Calendar.MARCH, 3));
+        assertEquals(consultationTerminal.medicalPrescription.getEndDate(), new Date(2022 - 1900, Calendar.MARCH, 3));
+        assertNotEquals(old, consultationTerminal.medicalPrescription.getEndDate());
         IncorrectEndingDateException thrown = assertThrows(IncorrectEndingDateException.class, () ->
-                        consultationTerminal.enterTreatmentEndingDate(new Date(2020-1900,Calendar.MARCH,3)),
+                        consultationTerminal.enterTreatmentEndingDate(new Date(2020 - 1900, Calendar.MARCH, 3)),
                 "End date comes before PrescDate");
         assertTrue(thrown.getMessage().contains("End date comes before PrescDate"));
 
@@ -260,7 +253,7 @@ class ConsultationTerminalTest {
         consultationTerminal.searchForProducts("DALSY");
         consultationTerminal.selectProduct(1);
         consultationTerminal.enterMedicineGuidelines(new String[]{"AFTERLUNCH", "5.5f", "Después de la comida", "7.5f", "4f", "HOUR"});
-        consultationTerminal.enterTreatmentEndingDate(new Date(2022-1900,Calendar.MARCH,3));
+        consultationTerminal.enterTreatmentEndingDate(new Date(2022 - 1900, Calendar.MARCH, 3));
         consultationTerminal.eSign = new DigitalSignature("12353");
         consultationTerminal.sendePrescription();
         Database.replace(pacientID, Health.sendePrescription(consultationTerminal.medicalPrescription));
@@ -272,6 +265,5 @@ class ConsultationTerminalTest {
         printingException thrown = assertThrows(printingException.class, () -> consultationTerminal.printePresc(),
                 "No prescription object");
         assertTrue(thrown.getMessage().contains("No prescription object"));
-
     }
 }

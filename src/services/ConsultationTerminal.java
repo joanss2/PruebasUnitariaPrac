@@ -23,7 +23,7 @@ public class ConsultationTerminal {
 
         pacient = VisitesProgramades.getHealthCardID();
         if (!pacient.isFormatValid(pacient.getPersonalID()))
-            throw new FormatException("PersonalID code from HealthCardID is invalid");      // HealthCardException --> FormatException that we use in other classes
+            throw new FormatException("PersonalID code from HealthCardID is invalid");      // HealthCardException equals to --> FormatException that we use in other classes
 
         medicalPrescription = HNS.getePrescription(pacient);
         if (medicalPrescription == null)
@@ -35,7 +35,7 @@ public class ConsultationTerminal {
         if (medicalPrescription == null)
             throw new AnyCurrentPrescriptionException("There is no medicalPrescription currently");
 
-        if (medicalPrescription.getEndDate().after(new Date()))
+        if (medicalPrescription.getEndDate().after(new Date()))                                             // Medical prescription has been finished or not
             throw new NotFinishedTreatmentException("Medical prescription is in progress");
     }
 
@@ -52,7 +52,7 @@ public class ConsultationTerminal {
             AnyMedicineSearchException, ConnectException {
         if (busqueda == null)
             throw new AnyMedicineSearchException("Search has not been started");
-        if (option <= busqueda.size())                   // The doctor chooses an option between 1 and busqueda size
+        if (option <= busqueda.size())                                                              // The doctor chooses an option between 1 and busqueda size
             this.medicament = HNS.getProductSpecific(option);
     }
 
@@ -65,7 +65,7 @@ public class ConsultationTerminal {
     }
 
     public void enterTreatmentEndingDate(Date date) throws IncorrectEndingDateException {
-        if (date == null || date.before(medicalPrescription.getPrescDate()) || date.before(new Date()))
+        if (date == null || date.before(medicalPrescription.getPrescDate()) || date.before(new Date()))                     // Comprovation that the dates are correct and not null
             throw new IncorrectEndingDateException("End date comes before PrescDate");
         medicalPrescription.setPrescDate(new Date());
         medicalPrescription.setEndDate(date);
@@ -88,14 +88,10 @@ public class ConsultationTerminal {
             throw new printingException("No prescription object");
         }
         System.out.println(medicalPrescription.toString());
-
     }
 
     public HealthCardID getPacient(){
         return this.pacient;
     }
-    /*public DigitalSignature geteSign(){
-        return this.eSign;
-    }*/
-    // Other methods, apart from the input events}
+
 }

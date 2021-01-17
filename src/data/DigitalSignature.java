@@ -8,8 +8,8 @@ final public class DigitalSignature {
 
     public byte[] signature;
 
-    public DigitalSignature(String signature) throws eSignatureException {       // FALTE COMPROBAR SI ALGUN DELLS NO ES UN BYTE --- ?? COM HO FEM PASEM UN INT?¿
-        if (checkSign(signature))
+    public DigitalSignature(String signature) throws eSignatureException {
+        if (checkSign(signature))                                               // Comprove signature to check that the format is correct, if not throw exception
             this.signature = signature.getBytes();
     }
 
@@ -17,13 +17,14 @@ final public class DigitalSignature {
         if (signature == null || signature.equals(""))
             throw new eSignatureException("Invalid Signature");
         for (int i = 0; i < signature.length(); i++) {
-            if ((int) signature.charAt(i) > 128)                            // No comprovem que és menor que -127 perk no transforma res a valors negatius
+            if ((int) signature.charAt(i) > 128)                            // We don't check that is less than -127 because don't transform to negative values
                 throw new eSignatureException("Invalid Signature");
 
         }
         return true;
     }
 
+    // Getter
     public byte[] getsignature() {
         return this.signature;
     }

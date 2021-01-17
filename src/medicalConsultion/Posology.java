@@ -11,6 +11,7 @@ public class Posology { // A class that represents the posology of a medicine
         this.freqUnit = u;
     }
 
+    // Getters and setters
     public void setDose(float d) {
         this.dose = d;
     }

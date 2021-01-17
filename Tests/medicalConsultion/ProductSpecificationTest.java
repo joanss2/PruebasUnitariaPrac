@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductSpecificationTest {
 
-    ProductSpecification productSpec1;
+    ProductSpecification productSpec1;                                                              // Declarations
     ProductSpecification productSpec2;
     ProductSpecification productSpec3;
     ProductSpecification productSpec11;
@@ -22,7 +22,7 @@ class ProductSpecificationTest {
     ProductID productID3;
 
     @BeforeEach
-    void setUp() throws FormatException {
+    void setUp() throws FormatException {                                                               // Inicializations
         productID1 = new ProductID("BUBAK");
         productID2 = new ProductID("BBSIT");
         productID3 = new ProductID("BBLYN");
@@ -46,41 +46,41 @@ class ProductSpecificationTest {
     }
 
     @Test
-    public void setId() {
+    public void setId() {                                                               // Setter
         productSpec1.setId(productID2);
         assertNotEquals(productSpec1, productSpec2);
     }
 
     @Test
-    public void setPrice() {
+    public void setPrice() {                                                                // Setter
         productSpec1.setId(productID3);
         productSpec1.setPrice(new BigDecimal("24.5"));
         assertEquals(productSpec1, productSpec3);
     }
 
     @Test
-    public void setDescription() {
+    public void setDescription() {                                                          // Setter
         productSpec1.setId(productID2);
         productSpec1.setDescription("Mal de cap");
         assertEquals(productSpec1, productSpec2);
     }
 
     @Test
-    public void getId() {
+    public void getId() {                                                                       // Getter
         assertEquals(productSpec1.getId(), productID1);
         assertEquals(productSpec2.getId(), productID2);
         assertNotEquals(productSpec1.getId(), productSpec2.getId());
     }
 
     @Test
-    public void getPrice() {
+    public void getPrice() {                                                                    // Getter
         assertEquals(productSpec1.getPrice(), new BigDecimal("23.5"));
         assertNotEquals(productSpec2.getPrice(), new BigDecimal("0"));
         assertNotEquals(productSpec1.getPrice(), productSpec3.getPrice());
     }
 
     @Test
-    public void getDescription() {
+    public void getDescription() {                                                          // Getter
         assertEquals(productSpec2.getDescription(), "Mal de cap");
         assertEquals(productSpec1.getDescription(), "Mal de panxa");
         assertNotEquals(productSpec1.getDescription(), productSpec2.getDescription());

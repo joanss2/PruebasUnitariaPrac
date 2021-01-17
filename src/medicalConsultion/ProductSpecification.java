@@ -11,9 +11,9 @@ public class ProductSpecification {
     private String description;
 
     public ProductSpecification(ProductID id, BigDecimal price, String description) throws NullPointerException, FormatException {
-        if (!id.comprovar_upc(id.getProductID()))
+        if (!id.comprovar_upc(id.getProductID()))                                           // Comprovation of the product ID
             throw new FormatException("UPCcode from  ProductID is invalid");
-        if (price == null || description == null || description.isEmpty())
+        if (price == null || description == null || description.isEmpty())                      // Null comprovation
             throw new FormatException("Price null or description null, Wrong format of ProductSpecification");
 
         this.id = id;
@@ -30,6 +30,7 @@ public class ProductSpecification {
         return id.equals(prodSpec1.id) && price.equals(prodSpec1.price) && description.equals(prodSpec1.description);
     }
 
+    // Getters and setters
     public void setId(ProductID id) {
         this.id = id;
     }

@@ -9,7 +9,7 @@ import Exceptions.eSignatureException;
 
 class DigitalSignatureTest {
 
-    DigitalSignature eSign1;
+    DigitalSignature eSign1;                                                // Declarations
     DigitalSignature eSign2;
     DigitalSignature eSign3;
     DigitalSignature eSign11;
@@ -17,7 +17,7 @@ class DigitalSignatureTest {
     DigitalSignature eSign31;
 
     @BeforeEach
-    void setUp() throws eSignatureException {
+    void setUp() throws eSignatureException {                               // Inicializations
         eSign1 = new DigitalSignature("12353");
         eSign2 = new DigitalSignature("12abz345");
         eSign3 = new DigitalSignature("abcde");
@@ -27,7 +27,7 @@ class DigitalSignatureTest {
     }
 
     @Test
-    void checkSign() throws eSignatureException {
+    void checkSign() throws eSignatureException {                                           // Comprovation if the signature  is valid or not?¿
         assertTrue(eSign1.checkSign("12353"));
         assertTrue(eSign2.checkSign("12abz345"));
         assertTrue(eSign3.checkSign("abcde"));
@@ -40,7 +40,7 @@ class DigitalSignatureTest {
     }
 
     @Test
-    void getsignature() {
+    void getsignature() {                                                               // Return the signature in bytes
         byte[] bytesESign1 = new byte[]{49, 50, 51, 53, 51};
         byte[] bytesESign2 = new byte[]{49, 50, 97, 98, 122, 51, 52, 53};
         byte[] bytesESign3 = new byte[]{97, 98, 99, 100, 101};

@@ -7,19 +7,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PosologyTest {
 
-    Posology pos1, pos2, pos3;
+    Posology pos1, pos2, pos3;                                                                          // Declarations
     FqUnit time = FqUnit.WEEK;
     FqUnit time2 = FqUnit.DAY;
     FqUnit time3 = FqUnit.MONTH;
 
     @BeforeEach
-    public void init() {
+    public void init() {                                                                    // Inicializations
         pos1 = new Posology(2.5f, 3.8f, time);
         pos2 = new Posology(5f, 4.5f, time2);
         pos3 = new Posology(3f, 1.3f, time3);
     }
 
     @Test
+        // Setter
     void setDose() {
         pos1.setDose(40.5f);
         assertEquals(pos1.getDose(), 40.5f);
@@ -30,7 +31,7 @@ class PosologyTest {
     }
 
     @Test
-    void setFreq() {
+    void setFreq() {                                                                                            // Setter
         pos1.setFreq(20);
         assertEquals(pos1.getFreq(), 20f);
         pos2.setFreq(1.8f);
@@ -40,7 +41,7 @@ class PosologyTest {
     }
 
     @Test
-    void setFreqUnit() {
+    void setFreqUnit() {                                                                        // Setter
         pos1.setFreqUnit(FqUnit.WEEK);
         assertEquals(pos1.getFreqUnit(), FqUnit.WEEK);
         pos2.setFreqUnit(FqUnit.DAY);
@@ -50,6 +51,7 @@ class PosologyTest {
     }
 
     @Test
+        // Getter
     void getDose() {
         assertEquals(pos1.getDose(), 2.5f);
         assertEquals(pos2.getDose(), 5f);
@@ -57,14 +59,14 @@ class PosologyTest {
     }
 
     @Test
-    void getFreq() {
+    void getFreq() {                                                                // Getter
         assertEquals(pos1.getFreq(), 3.8f);
         assertEquals(pos2.getFreq(), 4.5f);
         assertEquals(pos3.getFreq(), 1.3f);
     }
 
     @Test
-    void getFreqUnit() {
+    void getFreqUnit() {                                                                // Getter
         assertEquals(pos1.getFreqUnit(), time);
         assertEquals(pos2.getFreqUnit(), time2);
         assertEquals(pos3.getFreqUnit(), time3);

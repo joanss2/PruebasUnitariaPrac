@@ -12,6 +12,7 @@ public class MedicinePrescriptionLine {
         this.line = tkLine;
     }
 
+    // Getters
     public ProductID getId() {
         return this.id;
     }

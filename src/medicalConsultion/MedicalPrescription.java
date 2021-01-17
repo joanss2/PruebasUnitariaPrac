@@ -9,7 +9,7 @@ import Exceptions.*;
 
 import java.util.*;
 
-// A class that represents medical prescription
+
 public class MedicalPrescription {
     private int prescCode;
     private Date prescDate;
@@ -17,19 +17,18 @@ public class MedicalPrescription {
     private final List<MedicinePrescriptionLine> liniesDePrescripcio;
     public DigitalSignature eSign;
 
-    // Its components, that is, the set of medical prescription lines
-    //@Deprecated
+
     public MedicalPrescription(int prescCode, Date prescDate, Date endDate) throws IncorrectEndingDateException {
         this.prescCode = prescCode;
         this.prescDate = prescDate;
         this.endDate = endDate;
 
-        if(this.prescDate.after(this.endDate))
+        if (this.prescDate.after(this.endDate))                                                 // Comprove that the date is correct
             throw new IncorrectEndingDateException("End date is after prescription date");
         liniesDePrescripcio = new ArrayList<>();
     }
 
-    public TakingGuideline fromString(String[] instruc) {
+    public TakingGuideline fromString(String[] instruc) {                                   // Function that pass an instruction with string format to TakingGuideline object
         dayMoment nou = dayMoment.valueOf(instruc[0]);
         float duracio = Float.parseFloat(instruc[1]);
         String comentari = instruc[2];
@@ -76,7 +75,7 @@ public class MedicalPrescription {
         return -1;
     }
 
-    public boolean validInstruc(String[] pautes) {
+    public boolean validInstruc(String[] pautes) {                                              // Function witch comprove that the instructions are valid
         if (pautes.length != 6)
             return false;
         boolean bool = false;
@@ -105,7 +104,7 @@ public class MedicalPrescription {
         return bool;
     }
 
-    // getters and setters
+    // Getters and setters
     public Date getPrescDate() {
         return this.prescDate;
     }
@@ -134,7 +133,7 @@ public class MedicalPrescription {
         this.endDate = newEndDate;
     }
 
-    public void setSignature(DigitalSignature eSign){
+    public void setSignature(DigitalSignature eSign) {
         this.eSign = eSign;
     }
 

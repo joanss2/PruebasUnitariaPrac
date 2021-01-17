@@ -8,16 +8,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductIDTest {
 
-    ProductID product1, product2;
+    ProductID product1, product2;                                               // Declarations
 
     @BeforeEach
-    void setUp() throws FormatException {
+    void setUp() throws FormatException {                                           // Inicializations
         product1 = new ProductID("AABEC");
         product2 = new ProductID("AURON");
     }
 
     @Test
-    void getProductID() {
+    void getProductID() {                                                               // Getter
         assertEquals(product1.getProductID(), "AABEC");
         FormatException thrown = assertThrows(FormatException.class, () -> new ProductID("aabec"), "UPCcode from  ProductID is invalid");
         assertTrue(thrown.getMessage().contains("UPCcode from  ProductID is invalid"));
@@ -28,7 +28,7 @@ class ProductIDTest {
     }
 
     @Test
-    void comprovar_upc() {
+    void comprovar_upc() {                                                      // Comprove code
         assertTrue(product1.comprovar_upc(product1.getProductID()));
         assertFalse(product1.comprovar_upc("XQC23"));
     }

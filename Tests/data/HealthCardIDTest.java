@@ -8,23 +8,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HealthCardIDTest {
 
-    HealthCardID healthcard1, healthcard11, healthcard12;
+    HealthCardID healthcard1, healthcard11, healthcard12;                       // Declarations
 
     @BeforeEach
-    void setUp() throws FormatException {
+    void setUp() throws FormatException {                                           // Inicializations
         healthcard1 = new HealthCardID("BBBBBBBBQR648597807024000012");
         healthcard11 = new HealthCardID("BBBBBBBBQR648597807024000013");
         healthcard12 = new HealthCardID("BBBBBBBBQR648597807024000011");
     }
 
     @Test
-    void getPersonalID() {
+    void getPersonalID() {                                                              // Getter
         assertEquals(healthcard1.getPersonalID(), "BBBBBBBBQR648597807024000012");
         assertNotEquals(healthcard1.getPersonalID(), "BBBBBBBBRQ648597807024000011");
     }
 
     @Test
-    void isFormatValid() {
+    void isFormatValid() {                                                                  // If CarID is valid
         assertTrue(healthcard1.isFormatValid(healthcard1.getPersonalID()));
         assertTrue(healthcard11.isFormatValid(healthcard11.getPersonalID()));
         assertTrue(healthcard12.isFormatValid(healthcard12.getPersonalID()));
@@ -42,7 +42,7 @@ class HealthCardIDTest {
     }
 
     @Test
-    void allDigits() {
+    void allDigits() {                                                                          // Comprovation of the last part of the HealtCardID
         assertTrue(healthcard1.AllDigits(initArray("BBBBBBBBQR648597807024000012"), 10, 28));
         assertFalse(healthcard11.AllDigits(initArray("BBBBBBBBQR648597807Ff24000013"), 10, 28));
         assertTrue(healthcard12.AllDigits(initArray("BBBBBBBBQR648597807024000011"), 10, 28));
@@ -59,7 +59,7 @@ class HealthCardIDTest {
         assertNotEquals(healthcard11.toString(), "HealthCardID{ " + "personal code= " + healthcard12.getPersonalID() + "}");
     }
 
-    private char[] initArray(String code) {
+    private char[] initArray(String code) {                                         // Function to facility some test methods
         char[] array = new char[28];
         for (int i = 0; i < 28; i++) {
             array[i] = code.charAt(i);
