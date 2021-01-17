@@ -55,12 +55,12 @@ class ConsultationTerminalTest {
         }
 
         @Override
-        public boolean empty_agenda() {
+        public boolean emptyAgenda() {
             return listPacients.isEmpty();
         }
 
         @Override
-        public void add_pacient(HealthCardID nouID) {
+        public void addPacient(HealthCardID nouID) {
 
             listPacients.add(nouID);
         }
@@ -93,11 +93,11 @@ class ConsultationTerminalTest {
 
     @Test
     public void setVisites() throws FormatException {                                                       // Visites list
-        visites.add_pacient(new HealthCardID("BBBBBBBBSI123456111111111111"));
-        visites.add_pacient(new HealthCardID("BBBBBBBBSI000345111181111111"));
-        visites.add_pacient(new HealthCardID("BBBBBBBBSI123226111111111011"));
-        visites.add_pacient(new HealthCardID("BBBBBBBBRR456111111149311111"));
-        visites.add_pacient(new HealthCardID("BBBBBBBBXI123006111111111111"));
+        visites.addPacient(new HealthCardID("BBBBBBBBSI123456111111111111"));
+        visites.addPacient(new HealthCardID("BBBBBBBBSI000345111181111111"));
+        visites.addPacient(new HealthCardID("BBBBBBBBSI123226111111111011"));
+        visites.addPacient(new HealthCardID("BBBBBBBBRR456111111149311111"));
+        visites.addPacient(new HealthCardID("BBBBBBBBXI123006111111111111"));
     }
 
 
@@ -150,7 +150,7 @@ class ConsultationTerminalTest {
         assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI123226111111111011"));
         consultationTerminal.initRevision();
         consultationTerminal.initRevision();
-        if (visites.empty_agenda())
+        if (visites.emptyAgenda())
             System.out.println("Empty agenda, no revisions available");
     }
 
