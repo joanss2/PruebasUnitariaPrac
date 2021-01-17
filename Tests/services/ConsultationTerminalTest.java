@@ -150,8 +150,7 @@ class ConsultationTerminalTest {
         assertEquals(consultationTerminal.getPacient(), new HealthCardID("BBBBBBBBSI123226111111111011"));
         consultationTerminal.initRevision();
         consultationTerminal.initRevision();
-        if (visites.emptyAgenda())
-            System.out.println("Empty agenda, no revisions available");
+        assertTrue(consultationTerminal.VisitesProgramades.emptyAgenda());
     }
 
     @Test
